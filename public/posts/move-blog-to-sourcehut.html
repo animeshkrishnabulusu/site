@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="title" content="Animesh Bulusu" />
+    <link rel="canonical" href="https://animeshbulusu.com/posts/move-blog-to-sourcehut" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Animesh Bulusu" />
+    <meta name="copyright" content="Animesh Bulusu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 18px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer,
+        h1,
+        h1+h2 {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: end;
+        }
+
+        header a {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        h1 {
+            border-bottom: 5px solid dodgerblue;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-variant: all-small-caps;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>Move blog to sourcehut | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a></header>
+
+    <h1>Move blog to Sourcehut</h1>
+    <h2>bye gitlab</h2>
+    <main>
+        <article>
+            <div><time datetime="2022-08-28">Aug 28, 2022</time></div>
+            <!-- <small><em>last updated on Feb 16 2025</em></small> -->
+
+            <fieldset>
+                <legend>Feb 16 2025 update</legend>
+                <ol>
+                    <li>References to anmsh.net remain valid for the current domain</li>
+                    <li>Sourcehut's default debian image is good</li>
+                </ol>
+            </fieldset>
+
+            <p>This week I have moved my blog from Gitlab to SourceHut among a few other repositories.</p>
+            <p>Gitlab is a wonderful git host. I prefer Gitlab to Github and Azure DevOps for source
+                repositories and CI at work. This move was not motivated by the upcoming changes to Gitlab free
+                plan. It has been on my mind ever since I discovered SourceHut.</p>
+            <p><a href="https://sourcehut.org/">SourceHut</a> is an open source hacker-style collaboration platform. It
+                is
+                primarily a git repository host that includes commonly associated services such as continuous
+                integration,
+                mailing lists, issue tracking, IRC, wikis and some more. It was created by a prominent open source
+                developer
+                Drew Devault.</p>
+            <p>All these services are hosted on their own subdomains, for example git on <a
+                    href="https://git.sr.ht">https://git.sr.ht</a>, CI on <a
+                    href="https://builds.sr.ht">https://builds.sr.ht</a>. In a way, these are all microservices tied
+                together by an identity service that links everything to your account.</p>
+            <p>All the microservices included have the following personality:</p>
+            <ul>
+                <li>Fully open source</li>
+                <li>Self-hostable</li>
+                <li>Zero JavaScript &dagger;</li>
+                <li>Zero advertising and tracking</li>
+                <li>Super fast and light</li>
+            </ul>
+            <blockquote>
+                <p>&dagger; There is a tiny JS snippet that simply refreshes the build status every 5 seconds.</p>
+            </blockquote>
+            <p>I was left with two sites on a single domain the last time I <a href="/old/new-domain">did some
+                    reorganization</a> of my online presence stuff.</p>
+            <ol>
+                <li>
+                    <p>The portfolio at <a href="https://anmsh.net/">https://anmsh.net/</a> stored on SourceHut</p>
+                </li>
+                <li>
+                    <p>The blog at <a href="https://b.anmsh.net/">https://b.anmsh.net/</a> stored on Gitlab</p>
+                </li>
+            </ol>
+            <p>I always wanted a single website that could both be a portfolio, a blog and a personal wiki. At the time,
+                the
+                blog was already living on gitlab with the CI setup and the auto SSL setup. I created a separate static
+                portfolio site on SourceHut to learn about its capabilities. It was only logical to move to SourceHut
+                immediately. To do this, a few key requirements came up.</p>
+            <h2>migration requirements</h2>
+            <h3>Posts live at anmsh.net/post/</h3>
+            <p>This means that</p>
+            <ul>
+                <li>the subdomain b.anmsh.net is no longer needed. ✔</li>
+                <li>a single SSL certificate is sufficient and a simpler certbot command. &dagger; ✔</li>
+                <li>the merged site must be a Lektor site because it couldn't work with a HTML page. In this case, this
+                    was
+                    the static index.html that existed in the portfolio site.</li>
+            </ul>
+            <blockquote>
+                <p>&dagger; Used a wildcard domain .anmsh.net, but Gitlab auto SSL didn't work with this and I needed to
+                    do
+                    both auto SSL for the blog and the wildcard renewal for the portfolio.</p>
+            </blockquote>
+            <h3>New index page</h3>
+            <p>This means that</p>
+            <ul>
+                <li>the index page from blog will still be a combination of layout+header+footer<del>+search</del></li>
+                <li>the content and structure of the new index page will be similar to the one from portfolio site</li>
+            </ul>
+            <h3>Simplest git workflow</h3>
+            <p>A git push to the main branch for both code and content changes. I <a
+                    href="/old/update-to-blogging-workflow">did use a feature branch workflow</a> until now, but I am
+                done
+                with
+                it. This is way less maintenance overhead. ✔</p>
+            <h3>Replace Gitlab CI with Sourcehut Builds</h3>
+            <p>This had a few steps. Technically, this move was not just about the blog's source code, but also where it
+                gets deployed. I wrote about this in the post <a href="/posts/deploy-to-vps-with-sourcehut.html">Deploy
+                    to
+                    Linux VPS with SourceHut Builds</a>.</p>
+            <ul>
+                <li>
+                    <p>Use the same docker image <code>python:3.10-slim-bullseye</code> or find an equivalent. ❌</p>
+                    <blockquote>
+                        This did not work at the moment, since SourceHut did not have custom slimmed down images. I went
+                        with the Debian Testing image for the time. This did increase the build time by 13 seconds from
+                        when I was using the python slim image over at Gitlab. (36s to 49s)
+                    </blockquote>
+                </li>
+                <li>
+                    <p>Lektor build part to be introduced. This was relatively easier. So I will count it as win. ✔</p>
+                </li>
+            </ul>
+            <ul>
+                <li>Upload task remains the same. ✔</li>
+            </ul>
+            <h2>missing things</h2>
+            <ul>
+                <li>
+                    <p>Milestones and contribution history</p>
+                    <p>I do not need such niceties anymore, but these two were worth a mention.</p>
+                </li>
+                <li>
+                    <p>PR/MR workflow</p>
+                    <p>I am committed to learn the SourceHut's git send email workflow. I use the PR/MR workflow heavily
+                        at
+                        work anyway. It may annoy me a bit initially. However, my love for emails as an async
+                        communications
+                        tool and a thinking tool made me ready.</p>
+                </li>
+                <li>
+                    <p>Custom Python slim image</p>
+                    <p>This is the only real missing thing and hopefully a temporary challenge.</p>
+                </li>
+            </ul>
+
+
+        </article>
+    </main>
+    <footer>Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built with html</footer>
+    <style>
+        fieldset {
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+
+        legend {
+            padding: 3px 6px;
+        }
+    </style>
+</body>
+
+</html>

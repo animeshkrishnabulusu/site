@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="title" content="Animesh Bulusu" />
+    <link rel="canonical" href="https://animeshbulusu.com/posts/monitor-sql-server-backup-jobs-with-powershell" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Animesh Bulusu" />
+    <meta name="copyright" content="Animesh Bulusu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 18px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer,
+        h1,
+        h1+h2 {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: end;
+        }
+
+        header a {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        h1 {
+            border-bottom: 5px solid dodgerblue;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-variant: all-small-caps;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>Monitor SQL Server backup jobs with PowerShell | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a></header>
+
+    <h1>Monitor SQL Server backup jobs with PowerShell</h1>
+    <h2>cool script</h2>
+
+    <main>
+        <article>
+            <div><time datetime="2010-07-29">Jul 29, 2010</time></div>
+
+            <p>As part of my PowerShell adventures, I have created a shell script to monitor database backup jobs and
+                email a report to the team daily.</p>
+            <p>These jobs are created by the DBAs on SQL Server databases. So all I know is the name of the job and the
+                people to notify. This shell script can be customized for any type of job, but I am using it for
+                differential backup jobs.</p>
+            <h2>database query</h2>
+            <p>The meat of the entire shell script is in the database query. SQL Server jobs are stored in system
+                database <code>msdb</code>. This database has, among others, two tables that hold the information
+                necessary for generating our report - <code>sysjobhistory</code> and <code>sysjobs</code>.</p>
+            <p>So we write the query as follows joining these two tables.</p>
+            <pre>SELECT hist.SERVER AS [Server],
+    job.[name] AS [JobName],
+    CASE 
+        WHEN hist.message LIKE &#39;%differential%&#39;
+            THEN &#39;DIFF&#39;
+        ELSE &#39;FULL&#39;
+        END &quot;BackupType&quot;,
+    CASE hist.run_status
+        WHEN 0
+            THEN &#39;Failed&#39;
+        WHEN 1
+            THEN &#39;Success&#39;
+        WHEN 2
+            THEN &#39;Retry&#39;
+        WHEN 3
+            THEN &#39;Canceled&#39;
+        WHEN 4
+            THEN &#39;In progress&#39;
+        END &quot;RunStatus&quot;,
+    stuff(stuff(replace(str(run_duration, 6, 0), &#39; &#39;, &#39;0&#39;), 3, 0, &#39;:&#39;), 6, 0, &#39;:&#39;) AS [RunDuration],
+    convert(DATETIME, convert(VARCHAR(8), run_date) + &#39; &#39; + stuff(stuff(right(1000000 + run_time, 6), 3, 0, &#39;:&#39;), 6, 0, &#39;:&#39;)) AS LastRunTime
+FROM msdb..sysjobhistory hist
+INNER JOIN msdb..sysjobs job
+    ON hist.job_id = job.job_id
+WHERE job.enabled = 1
+    AND job.name LIKE &#39;%[_]backup%&#39;
+    AND hist.step_id = 1
+    AND DATEDIFF(dd, CONVERT(VARCHAR(8), hist.run_date), GETDATE()) &lt;= 1
+</pre>
+            <p>The required criteria needs to be understood.</p>
+            <p><code>job.enabled = 1</code><br>
+                means jobs that are active</p>
+            <p><code>job.name LIKE '%[_]backup%'</code><br>
+                means jobs with names that end with <code>_backup</code></p>
+            <p><code>hist.step_id = 1</code><br>
+                is a way to restrict records to one row per job. We could also use <code>(job outcome)</code> step to
+                achieve this.</p>
+            <p><code>DATEDIFF(dd, CONVERT(VARCHAR(8), hist.run_date), GETDATE()) &lt;= 1</code><br>
+                means jobs that ran since yesterday.</p>
+            <p>Thanks Vamsy for the pointing me to system database <code>msdb</code>.</p>
+            <p>Now that we have our script ready, let us complete the shell script.</p>
+            <h2>shell script</h2>
+            <p>The step by step breakdown:</p>
+            <ol>
+                <li>Create a log file</li>
+                <li>Fetch database server list</li>
+                <li>Collect results</li>
+                <li>Format the result set</li>
+                <li>Create a style tag</li>
+                <li>Create HTML report</li>
+                <li>Notify team</li>
+            </ol>
+            <h3>Create a log file</h3>
+            <p>Since this is a daily job, we need to be able to identify the log file by looking at the filename. Though
+                the filename may seem verbose, I do this, since the files may be moved to another location later on and
+                the context is lost unless we put in some extra effort on metadata.</p>
+            <pre>$logsfolder = "logs\failedbackups\"
+$filedate = get-date –uformat %m%d%Y-%H%M%S;
+$logfile  = $logsfolder+"failedjob-report-"+$filedate+".log"
+</pre>
+            <p>This will give me the following filename</p>
+            <pre>failedjob-report-07072018-192657.log
+</pre>
+            <h3>Fetch database server list</h3>
+            <p>I use this local path, (local to the server), for storing configuration for all my scripts. Use
+                <code>Get-Content</code> to get all content of the <code>dbs.txt</code> file.
+            </p>
+            <pre>$cfg="C:\Documents and Settings\banimesh\ps\config"
+$dbservers = @(gc $cfg\dbs.txt)
+</pre>
+            <h3>Collect results</h3>
+            <p>Once we have the list of database servers, we iterate through it, execute the database query and get the
+                results back into a datatable.</p>
+            <p>A <code>DataTable</code> and <code>SQLConnection</code> in PowerShell. I don't know about you, but that
+                is so cool. To be able to use full .NET framework inside PowerShell is definitely a winning approach,
+                should you feel the need to do so. You might ask then ask why, and rightly so, use PowerShell instead of
+                a C# program. That topic is itself a blog post or article someone somewhere will write or has written
+                already, but succinctly, PowerShell is a shell scripting language and automation framework. That is it.
+                With .NET framework at its disposal, you just accessed its god mode. Please, that someone, write an
+                article about this, so I don't have to explain it. Thank you.</p>
+            <p>One example I would usually give is, if you want a list of environment variables, you would simply type
+                <code>gci env:</code> on the PowerShell prompt. I can imagine there being a simple environment API to
+                access with a C# program, but the time to open Visual Studio and create a working solution is not worth
+                your while. This explanation is only for people who don't get the <em>why</em> of PowerShell.
+            </p>
+            <p>Sorry for the digression.</p>
+            <p>Then, similar to an <code>ADO.NET</code> piece of code, we create an SQLConnection and open it,</p>
+            <pre>$dataTable = new-object "System.Data.DataTable"
+$conn = new-object System.Data.SqlClient.SqlConnection "server=$server;database=msdb;Integrated Security=sspi"
+$conn.Open()
+</pre>
+            <p>create an SQLCommand and pass it our database query,</p>
+            <pre>$sqlCmd = $conn.CreateCommand()
+$sqlCmd.CommandText = $(get-content $cfg\report2.sql)
+</pre>
+            <p>and finally create an SQLDataReader to hold the result set.</p>
+            <pre>$reader = $sqlCmd.ExecuteReader()
+</pre>
+            <p>Then load the result set in the datatable and close the connection.</p>
+            <pre>$dataTable.Load($reader)
+$conn.Close()
+</pre>
+            <p>Then append each datatable to a datatable array, <code>$datatables</code>.</p>
+            <pre>$dataTables += $dataTable
+</pre>
+            <h3>Format the result set</h3>
+            <p>We pipe the datatable array <code>$datatables</code> to <code>Format-Table</code> utility to create a
+                PowerShell table object according to the structure of our result set, and dump it into the log file.</p>
+            <p><code>-auto</code> parameter, short for <code>AutoSize</code>, automatically sizes your table, so it
+                looks nice.</p>
+            <p>Now that the content of our report is ready, we move on to building a HTML report.</p>
+            <h3>Create a style tag</h3>
+            <p>We will create a style tag and append contents of a <code>report.css</code> into it. This is so we can
+                can embed the style tag inside our HTML report.</p>
+            <pre>$styleTag = "&lt;style&gt;"
+$styleTag = $styleTag + @(gc $cfg\report.css)
+$styleTag = $styleTag + "&lt;/style&gt;"
+</pre>
+            <h3>Create HTML report</h3>
+            <p>Now we transform the <code>$datatables</code> object in three ways.</p>
+            <ol>
+                <li>Convert into a PowerShell object so that it can be further transformed.</li>
+                <li>Sort the object by RunStatus and then by Server, so that most recently run job is seen first.</li>
+                <li>Convert this PowerShell object into an HTML table. </li>
+            </ol>
+            <p>This HTML table contains a full boilerplate HTML with a table with its child elements.</p>
+            <pre>$emailbody = $dataTables 
+        | select-object Server,JobName,BackupType,RunStatus,RunDuration,LastRunTime 
+        | Sort-Object RunStatus,Server 
+        | ConvertTo-Html -head $styleTag
+</pre>
+            <p><code>-head $styleTag</code> parameter sets the style tag inside the head element of this generated HTML.
+                What!</p>
+            <h3>Notify team</h3>
+            <p>Once the HTML report is ready, we send it using SMTP utils of PowerShell. We check the previously filled
+                log file if there are any errors. If any, then change a few things to catch the recipients attention.
+            </p>
+            <p>The completed shell script follows.</p>
+            <pre># 1. Create a log file 
+$today = Get-Date
+write-host $today
+$today = $today.ToString(&quot;MM dd yyyy&quot;)
+
+$logsfolder = &quot;logs\failedbackups\&quot;
+$filedate = get-date –uformat %m%d%Y-%H%M%S;
+$logfile  = $logsfolder+&quot;failedjob-report-&quot;+$filedate+&quot;.log&quot;
+$psf=&quot;C:\Documents and Settings\banimesh\ps\&quot;
+
+# 2. Fetch database server list
+$cfg=&quot;C:\Documents and Settings\banimesh\ps\config&quot;
+$dbservers = @(gc $cfg\dbs.txt)
+
+$dataTables=@()
+
+# 3. Collect results
+foreach($server in $dbservers)
+{
+    $dataTable = new-object &quot;System.Data.DataTable&quot;
+    $conn = new-object System.Data.SqlClient.SqlConnection &quot;server=$server;database=msdb;Integrated Security=sspi&quot;
+    $conn.Open()
+    $sqlCmd = $conn.CreateCommand()
+    $sqlCmd.CommandText = $(get-content $cfg\report2.sql)
+    $reader = $sqlCmd.ExecuteReader()
+    $dataTable.Load($reader)
+    $conn.Close()
+    $dataTables += $dataTable
+}
+
+# 4. Format the result set
+$dataTables | ft Server,JobName,BackupType,RunStatus,RunDuration,LastRunTime -auto
+         &gt;&gt; $psf\$logfile
+
+# 5. Create a style tag
+$styleTag = &quot;&lt;style&gt;&quot;
+$styleTag = $styleTag + @(gc $cfg\report.css)
+$styleTag = $styleTag + &quot;&lt;/style&gt;&quot;
+
+# 6. Create HTML report
+$emailbody = $dataTables 
+                | select-object Server,JobName,BackupType,RunStatus,RunDuration,LastRunTime 
+                | Sort-Object RunStatus,Server 
+                | ConvertTo-Html -head $styleTag
+
+# 7. Notify team
+$emailFrom = &quot;notifier@company.com&quot;;
+$emailTo = &quot;itsupport@company.com&quot;;
+
+$cnt = (select-string $psf\$logfile -pattern &quot;failed&quot;).count
+
+if($cnt -gt 0)
+{
+    $subject = &quot;Daily Backup Errors Occurred $($today)&quot;;
+}
+else
+{   
+    $subject = &quot;Daily Backup Notification $($today)&quot;;
+}
+
+$msg = New-Object Net.Mail.MailMessage($emailFrom, $emailTo,$subject,$emailBody)
+$msg.IsBodyHTML = $true
+$smtpServer = &quot;smtpsrv&quot;
+$smtp = new-object Net.Mail.SmtpClient($smtpServer)
+
+if($cnt -gt 0)
+{
+    $msg.Priority = [System.Net.Mail.MailPriority]::High;
+}
+
+$smtp.Send($msg)
+</pre>
+            <h2>styling the report</h2>
+            <p>It is not the most visually pleasing, but it will do.</p>
+            <pre>
+body {
+    font-size: small;
+}
+
+TABLE {
+    width: 90%;
+    border: 1px solid #999;
+    border-collapse: collapse;
+}
+
+TH {
+    width: auto;
+    border: 1px solid #ccc;
+    text-align: left;
+    padding: 1px;
+    background: lightyellow;
+}
+
+TD {
+    width: auto;
+    border: 1px solid #ccc;
+    text-align: left;
+    padding: 2px 1px;
+}
+</pre>
+        </article>
+    </main>
+    <footer>Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built with html</footer>
+    <style>
+        pre {
+            outline: 2px solid dodgerblue;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            padding: 5px;
+            overflow: auto
+        }
+    </style>
+</body>
+
+</html>

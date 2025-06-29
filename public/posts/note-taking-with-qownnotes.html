@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="title" content="Animesh Bulusu" />
+    <link rel="canonical" href="https://animeshbulusu.com/posts/note-taking-with-qownnotes" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Animesh Bulusu" />
+    <meta name="copyright" content="Animesh Bulusu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 18px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer,
+        h1,
+        h1+h2 {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: end;
+        }
+
+        header a {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        h1 {
+            border-bottom: 5px solid dodgerblue;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-variant: all-small-caps;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>Note taking with QOwnNotes | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a></header>
+
+    <h1>Note taking with QOwnNotes</h1>
+    <h2>qt-based awesomeness</h2>
+
+    <main>
+        <article>
+            <div><time datetime="2019-05-11">May 11, 2019</time></div>
+            <small><em>last updated on May 26, 2019</em></small>
+
+            <p>I have written a few days back about the <a href="/posts/picking-a-note-taking-software">search</a> for
+                near perfect note taking software. I would like to provide a short rundown on the features of
+                QOwnNotes in this post.</p>
+            <p>QOwnNotes is a open source notepad with markdown support and hierarchical notes. Let us look at some
+                features.</p>
+            <h2>Markdown support</h2>
+            <p>Markdown is the default plaintext editing option. Files can be written in plain text and saved as
+                markdown files. This is crucial for me because my fundamental goal is to create a personal knowledge
+                base accessible to me in the browser. It may either be public accessible website or a website local
+                to my machine.</p>
+            <p>QOwnNotes has a markdown preview panel which lets us view our rendered markdown live next to the
+                editor panel. With the live preview present, I have no use for other Linux desktop markdown editors
+                like typora, abricotine, retext and remarkable.</p>
+            <p>This is how the editor and preview look like.</p>
+            <p><a href="https://i.imgur.com/qze0U4d.png"><img src="https://i.imgur.com/qze0U4d.png"
+                        alt="Picture of QOwnNotes editor and preview panels"></a></p>
+            <h2>Hierarchical notes</h2>
+            <p>Let us say, we have the following structure with some notes. Note that the files
+                <code>learning-resources.md</code> and <code>tutorials.md</code> are at the root level of the
+                <code>learning</code> folder.
+            </p>
+            <pre>└── learning
+    ├── dotnet
+    │   ├── designpatterns.md
+    │   ├── generics.md
+    │   └── solid.md
+    ├── javascript
+    │   ├── angular.md
+    │   ├── es6.md
+    │   └── react.md
+    ├── learning-resources.md
+    └── tutorials.md
+
+3 directories, 9 files
+</pre>
+            <p>To be able to view this structure inside QOwnNotes</p>
+            <ul>
+                <li>create a note folder <code>testing</code> from the settings dialog</li>
+                <li>select path to <code>learning</code> folder as the note folder path</li>
+                <li>select Use note subfolders option</li>
+            </ul>
+            <p>This is how it looks. As you can see here, the folder structure that we created before is showing up
+                as is.</p>
+            <p><a href="https://i.imgur.com/7G9vFbo.png"><img src="https://i.imgur.com/7G9vFbo.png"
+                        alt="Picture of QOwnNotes note folder hierarchy"></a></p>
+            <p>In the top panel, we see the folders and <code>learning</code> folder is selected. In the bottom
+                panel, we see all the files in the <code>learning</code> folders, including its subfolders. If we
+                now select the <code>dotnet</code> folder, in the bottom panel, we will only see the files from this
+                folder.</p>
+            <p><a href="https://i.imgur.com/2mdgNLH.png"><img src="https://i.imgur.com/2mdgNLH.png"
+                        alt="Picture of QOwnNotes note folder hierarchy"></a></p>
+            <p>Apart from this display of folder hierarchy, we can also apply tags to files. All tags created across
+                the the entire note folder called <code>testing</code> will show up in the middle panel.</p>
+            <p>Here is an example from one of my note folders with two tags, <code>csharp</code> and
+                <code>linux</code>.
+            </p>
+            <p><a href="https://i.imgur.com/ih2DFbF.gif"><img src="https://i.imgur.com/ih2DFbF.gif"
+                        alt="Picture of QOwnNotes note folder hierarchy"></a></p>
+            <h2>Note folders</h2>
+            <p>We can create multiple note folders in the settings dialog. Each note folder will act as a workspace.
+                Notes in a note folder will only show up in that note folder.</p>
+            <p>Create all your note folders and designate one note folder as active note folder. To view and switch
+                between note folders, there is a panel available. It might not be displayed by default or if you
+                changed to Minimal layout mode. To re-enable it, select the following menu item.</p>
+            <p>Window &gt; Panels &gt; Note folder panel</p>
+            <p>This is particularly useful when we have many text files in a complex folder hierarchy.</p>
+            <p>In QOwnNotes, confusingly enough there is a feature called workspaces, but it is for different
+                layouts we would like to use.</p>
+            <h2>Keyboard accessibility</h2>
+            <p>Most of the menu items are keyboard accessible. I use few shortcuts often.</p>
+            <ul>
+                <li>Add tag to note: Alt+Shift+A</li>
+                <li>Switch to next note: Alt+Down</li>
+                <li>Switch to previous note: Alt+Prev</li>
+                <li>Select note folder: Ctrl+Alt+;</li>
+                <li>Insert current time: Ctrl+T</li>
+            </ul>
+            <h2>Conclusion</h2>
+            <p>There are other features you will find useful and more.</p>
+            <ul>
+                <li>note linking</li>
+                <li>note splitting</li>
+                <li>built-in todo list</li>
+                <li>distraction free mode</li>
+                <li>encryption</li>
+                <li>panel unlocking</li>
+                <li>scriptability</li>
+            </ul>
+            <p>QOwnNotes has replaced markdown editors and even geany for editing markdown files. I have been using
+                it extensively this past week and recommend it very highly. If you need a quality markdown notepad
+                for maintaining your personal knowledge base, give it a try.</p>
+            <p>How do you pronounce QOwnNotes? For something that I am going to use every waking moment, I need to
+                know this. Some possibilities include &mdash; Queue Own Notes, Cone Notes, Connotes, QNote, QNotes.
+                Let us try to find out.</p>
+            <p>Update: The creator <a
+                    href="https://github.com/pbek/QOwnNotes/issues/1203#issuecomment-491033995">prefers</a> to call
+                it Q-Own-Notes.</p>
+            <p>Learn more about QOwnNotes on its <a href="https://github.com/pbek/QOwnNotes/">github repository</a>.
+                To play with markdown, use <a href="https://daringfireball.net/projects/markdown/dingus">Dingus</a>.
+            </p>
+    </main>
+
+    <footer>
+        Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built with html (for now)
+    </footer>
+    <style>
+        img {
+            width: 100%
+        }
+
+        pre {
+            outline: 2px solid dodgerblue;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            padding: 5px;
+            overflow: auto
+        }
+    </style>
+</body>
+
+</html>

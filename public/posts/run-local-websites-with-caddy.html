@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="title" content="Animesh Bulusu" />
+    <link rel="canonical" href="https://animeshbulusu.com/posts/run-local-websites-with-caddy" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Animesh Bulusu" />
+    <meta name="copyright" content="Animesh Bulusu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 18px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer,
+        h1,
+        h1+h2 {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: end;
+        }
+
+        header a {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        h1 {
+            border-bottom: 5px solid dodgerblue;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-variant: all-small-caps;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>Move blog to sourcehut | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a></header>
+
+    <h1>Run local websites with Caddy</h1>
+    <h2>on windows</h2>
+
+    <main>
+        <article>
+
+            <div><time datetime="2022-06-10">Jun 10, 2022</time></div>
+
+            <p>Every idea of mine starts its implementation either as a spreadsheet, database or a static site. I am
+                a big fan of static sites as they are often a gateway to developing the full-fledged web app.</p>
+            <p>To run them locally, only a lightweight webserver is needed instead of webpack et al. For the longest
+                time I used a tiny go app called <a href="https://github.com/cortesi/devd">devd</a> on Windows. It
+                is simple to use. Install it and run the command <code>devd</code> in any directory with static
+                files (HTML/CSS and may be some JS). That's it, the website will be available on the specified port
+                instantly.</p>
+            <p>To run one of my static websites, I used to run this command daily on terminal:</p>
+            <pre>$ cd source\repos\_sourcehut\anmsh.net &amp;&amp; devd -lp 8091 .
+</pre>
+            <p>I needed to automate this process as I had more local websites coming up. I needed something quick
+                and easy.</p>
+            <p>First I put the above command in a batch file and then tried to run it as a service using the
+                <code>sc</code> command. For some reason, it did not work out. Batch files simply don't translate
+                into Windows services as I learned.
+            </p>
+            <p>Then, I recollected the legendary instsrv and srvany executables which were made for converting
+                anything into a service. I did not go this route as I was not sure and did not remember whether it
+                would work on batch files.</p>
+            <p>At this point, I found other tools like nssm etc, but it felt like an opportunity to use a proper
+                webserver. This resulted in some webserver shopping.</p>
+            <p>I briefly recounted my IIS days (hello freb logs). I love nginx on Linux, but it seemed to be some
+                adventure on Windows the last time I thought of this combination. Hence Caddy was an ultimate
+                choice.</p>
+            <p><a href="https://caddyserver.com/">Caddy</a> is a fast webserver written in go with a great feature
+                list. Install it with scoop:</p>
+            <pre>scoop install caddy
+</pre>
+            <p>Navigate to the directory where a static website exists. Serve this static website from within the
+                directory using this command:</p>
+            <pre>$ caddy file-server --listen :5000
+</pre>
+            <p>Resulting output indicates that the directory is now served on port 5000.</p>
+            <pre>...
+...
+{"level":"info","ts":1654843359.6882875,"msg":"Caddy serving static files on :5000"}
+...
+</pre>
+            <p>The next step is to setup Caddy as a background service so that my websites are running all the time.
+                For this, there are a few ways to do this: 1. Winsw, and 2. the old method of using instsrv.exe and
+                srvany.exe.</p>
+            <p>Winsw is a wrapper executable that can be used to host any executable as a windows service. Winsw is
+                also the recommended way from Caddy documentation. Install it with scoop.</p>
+            <pre>$ scoop install winsw
+
+Download: (OK):download completed.
+Checking hash of WinSW-x64.exe ... ok.
+Linking ~\scoop\apps\winsw\current =&gt; ~\scoop\apps\winsw\2.11.0
+Creating shim for 'WinSW'.
+'winsw' (2.11.0) was installed successfully!
+</pre>
+            <p>Find the winsw executable to do the next step.</p>
+            <pre>$ scoop prefix winsw
+C:\Users\anmsh\scoop\apps\winsw\current
+</pre>
+            <p>Open directory</p>
+            <p><img src="https://i.imgur.com/64rhtpw.png" alt="WinSW install directory"></p>
+            <p>Copy WinSW.exe into another directory and rename it as caddy-service.exe.</p>
+            <p><img src="https://i.imgur.com/Hqi2KEw.png" alt="Caddy directory"></p>
+            <p>Create a <code>caddy-service.xml</code> with following contents:</p>
+            <pre>&lt;service&gt;
+  &lt;id&gt;caddy&lt;/id&gt;
+  &lt;name&gt;Caddy Web Server (powered by WinSW)&lt;/name&gt;
+  &lt;description&gt;Caddy Web Server (https://caddyserver.com/)&lt;/description&gt;
+  &lt;executable&gt;C:\Users\anmsh\scoop\apps\caddy\current\caddy.exe&lt;/executable&gt;
+  &lt;arguments&gt;run&lt;/arguments&gt;
+  &lt;log mode="roll-by-time"&gt;
+    &lt;pattern&gt;yyyy-MM-dd&lt;/pattern&gt;
+  &lt;/log&gt;
+&lt;/service&gt;
+</pre>
+            <p>In my case <code>&lt;executable&gt;</code> points to the scoop apps installation path. If caddy was
+                installed in an other way, then use that path to caddy.exe instead.</p>
+            <p>Now install caddy as a service using:</p>
+            <pre>$ caddy-service install
+</pre>
+            <p>Open services.msc to verify whether caddy got installed. Another way to do this is with the
+                <code>sc</code> command:
+            </p>
+            <pre>$ sc query caddy
+
+SERVICE_NAME: caddy
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 1  STOPPED
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+</pre>
+            <p>Caddy is installed as a service but is in the <code>STOPPED</code> state at the moment. A log file
+                caddy-service.wrapper.log is created in the same directory.</p>
+            <pre>2022-06-10 17:54:01,447 DEBUG - Starting WinSW in console mode
+2022-06-10 17:54:04,675 DEBUG - Starting WinSW in console mode
+2022-06-10 17:54:04,701 INFO  - Installing service 'Caddy Web Server (powered by WinSW) (caddy)'...
+2022-06-10 17:54:04,730 INFO  - Service 'Caddy Web Server (powered by WinSW) (caddy)' was installed successfully.
+2022-06-10 18:02:34,960 DEBUG - Starting WinSW in service mode
+2022-06-10 18:02:35,051 INFO  - Starting C:\Users\anmsh\scoop\apps\caddy\current\caddy.exe run
+...
+</pre>
+            <p>Caddy is ready. Now defining local websites is all that is left to do. Create an extensionless file
+                <code>Caddyfile</code> in the same directory where caddy-service.exe exists.
+            </p>
+            <pre>$ touch Caddyfile
+</pre>
+            <p>Specify websites with site addresses:</p>
+            <pre>http://localhost:5000 {
+    root C:\Users\anmsh\source\repos\_gitlab\anmsh.gitlab.io\out
+    file_server
+}
+
+http://localhost:6001 {
+    root C:\Users\anmsh\source\repos\_sourcehut\anmsh.net
+    file_server
+}
+</pre>
+            <p>Here, two local websites are specified with 5000 and 6001 ports respectively. The
+                <code>file_server</code>directive tells caddy to display static files in the root. Omit the
+                <code>http://</code> part of the site addresses to use a HTTPS URL.
+            </p>
+            <p>Let caddy know that it has a configuration file to utilize.</p>
+            <pre>$ caddy reload
+
+{"level":"info","ts":1654883253.7133667,"msg":"using adjacent Caddyfile"}
+</pre>
+            <p>The <code>Caddyfile</code> next to the caddy-service.exe is automatically picked to run. The two
+                sites can now be reached in the browser on their respective ports.</p>
+            <p>Two log files caddy-service_2022-06-10.out.log and caddy-service_2022-06-10.err.log are created upon
+                the reload. If something isn't working, check this err.log file.</p>
+            <p>Restart the machine to make sure these websites are running on Windows startup.</p>
+            <p>After restarting the machine, check the caddy service status. It should be in the
+                <code>RUNNING</code> state.
+            </p>
+            <pre>$ sc query caddy
+
+SERVICE_NAME: caddy
+        TYPE               : 10  WIN32_OWN_PROCESS
+        STATE              : 4  RUNNING
+                                (STOPPABLE, NOT_PAUSABLE, ACCEPTS_SHUTDOWN)
+        WIN32_EXIT_CODE    : 0  (0x0)
+        SERVICE_EXIT_CODE  : 0  (0x0)
+        CHECKPOINT         : 0x0
+        WAIT_HINT          : 0x0
+</pre>
+    </main>
+    <footer>Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built with html</footer>
+    <style>
+        pre {
+            outline: 2px solid dodgerblue;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            padding: 5px;
+            overflow: auto
+        }
+    </style>
+</body>
+
+</html>

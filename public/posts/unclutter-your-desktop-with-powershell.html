@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="title" content="Animesh Bulusu" />
+    <link rel="canonical" href="https://animeshbulusu.com/posts/unclutter-your-desktop-with-powershell" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Animesh Bulusu" />
+    <meta name="copyright" content="Animesh Bulusu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 18px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer,
+        h1,
+        h1+h2 {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: end;
+        }
+
+        header a {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        h1 {
+            border-bottom: 5px solid dodgerblue;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-variant: all-small-caps;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>Unclutter your desktop with PowerShell | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a></header>
+
+    <h1>Unclutter your desktop with PowerShell</h1>
+    <h2>cool script</h2>
+
+    <main>
+        <article>
+            <div><time datetime="2011-06-18">Jun 18, 2011</time></div>
+
+            <p>As much as I love a clean desktop, I know it is impossible to let it remain uncluttered for long.</p>
+            <p><img src="https://i.imgur.com/X4Fybuf.gif" alt="Image of a messy desktop" />
+                <em><a href="https://www.flickr.com/photos/alwayshere/641749184">Flickr: Josh Swannack / Messy
+                        Desktop</a></em>
+            </p>
+            <p>One strategy I started using to keep the desktop clean was to cut and paste all loose files into a folder
+                named ORG from time to time. This way I would know where to go when I needed that one file I saved
+                somewhere.</p>
+            <p>Since I am now using the awesome PowerShell v2, I wrote script to do this for me automatically.</p>
+            <pre>>$dirtyfolder = &quot;C:\Documents and Settings\banimesh\Desktop\&quot;
+$org = &quot;$dirtyfolder\ORG&quot;
+
+
+ls &quot;$($dirtyfolder)/*&quot; | ? {!$_.PSIsContainer} | %{
+  $dest = &quot;$($org)\$($_.extension)&quot;
+  if (! (Test-Path -path $dest ) ) 
+  {
+    write-host &quot;creating $dest&quot;
+    new-item $dest -type directory
+  }
+  mv -path $_ -destination $dest 
+}
+</pre>
+            <p>This solution felt equivalent to shoving all your clutter under the bed since the mess, as a unit, was
+                simply
+                moved to another location.</p>
+            <p>So I decided to organize the clutter by file extension. I have updated the above piece of code to do that
+                as
+                follows.</p>
+            <pre>>ls $dirtyfolder/* | ? {!$_.PSIsContainer} | %{
+  $dest = &quot;$($org)ORG\$($_.extension)&quot;
+  if (! (Test-Path -path $dest ) ) {
+    new-item $dest -type directory
+  }
+  mv -path $_.fullname -destination $dest 
+}
+</pre>
+            <p>This was good but the number of folders inside the ORG folder was too many for the solution to be of any
+                use
+                to me.</p>
+            <p>So I tinkered around with grouping by file category and came up with the below solution.</p>
+            <pre>>function get-destbytype($ext) 
+{
+    switch ($ext)
+    {
+        { $ext -match &#39;(jpg|png|gif|bmp)&#39;} { &quot;images&quot; }
+        { $ext -match &#39;(divx|mpeg|avi)&#39;} { &quot;videos&quot; }
+        { $ext -match &#39;(cs|js|java|py|class|vbs|jsp)&#39;} { &quot;code&quot; }
+        { $ext -match &#39;(sql|ps1|pl|py)&#39;} { &quot;scripts&quot; }
+        { $ext -match &#39;(zip|7z|rar)&#39;} { &quot;compressed&quot; }
+        { $ext -match &#39;(ppt|pptx|doc|docx|pdf)&#39;} { &quot;documents&quot; }
+        { $ext -match &#39;(csv|xls|xlsx)&#39;} { &quot;spreadsheets&quot; }
+        { $ext -match &#39;(exe|dll|jar|ear|bat|cmd)&#39;} { &quot;executables&quot; }
+        { $ext -match &#39;(txt|log)&#39;} { &quot;text&quot; }
+        { $ext -match &#39;(vm|msg|htm|html|lnk)&#39;} { &quot;miscellaneous&quot; }
+        { $ext -match &#39;(properties|xml|ini)&#39;} { &quot;config&quot; }
+        default {&quot;$ext&quot; }
+    }
+}
+
+$dirtyfolder = &quot;C:\Documents and Settings\banimesh\Desktop\&quot;
+$org = &quot;$C:\Documents and Settings\banimesh\Desktop\ORG&quot;
+
+
+ls $dirtyfolder/* | ? {!$_.PSIsContainer} | %{
+  $dest = &quot;$($org)\$(get-destbytype $_.extension)&quot;
+  if (! (Test-Path -path $dest ) ) 
+  {
+    write-host &quot;creating $dest&quot;
+    new-item $dest -type directory
+  }
+  mv -path $_ -destination $dest 
+}
+</pre>
+            <p>One bug I found in this was that <code>.cs</code> and <code>.csv</code> are moved to a single folder. I
+                will
+                fix it later.</p>
+        </article>
+    </main>
+    <footer>Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built with html</footer>
+    <style>
+        img {
+            width: 100%
+        }
+
+        pre {
+            outline: 2px solid dodgerblue;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            padding: 5px;
+            overflow: auto
+        }
+    </style>
+</body>
+
+</html>

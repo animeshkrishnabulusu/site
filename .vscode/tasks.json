@@ -4,13 +4,30 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Run HTTP Server",
+            "label": "rsync",
             "type": "shell",
-            "command": "python3 -m http.server --directory ./public 8000",
-            "problemMatcher": [],
+            "command": "rsync",
+            "args": [
+                "-a",
+                "--delete",
+                "--include='*.ico'",
+                "--include='*.html'",
+                "--include='*.jpg'",
+                "--include='*.png'",
+                "--include='posts/'",
+                "--include='thoughts/'",
+                "--include='old/'",
+                "--exclude='*'",
+                ".",
+                "public/",
+                "/var/www/log.baksignal.com/"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
+            },
+            "presentation": {
+                "close": true
             }
         }
     ]
