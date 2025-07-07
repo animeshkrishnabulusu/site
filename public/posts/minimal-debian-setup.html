@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="title" content="Animesh Bulusu" />
+    <link rel="canonical" href="https://log.baksignal.com/posts/minimal-debian-setup/" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Animesh Bulusu" />
+    <meta name="copyright" content="Animesh Bulusu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 18px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer,
+        h1,
+        h1+h2 {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: end;
+        }
+
+        header a {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        h1 {
+            border-bottom: 5px solid dodgerblue;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-variant: all-small-caps;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>A minimal Debian setup | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a></header>
+
+    <h1>A minimal Debian setup</h1>
+    <h2>the final setup</h2>
+    <main>
+        <article>
+            <div><time datetime="2024-05-26">May 26, 2024</time></div>
+
+            <p>I have built a minimal Debian once again. It is a quite a similar setup to the previous attempt but with
+                some noticeable changes and corrections to the process.</p>
+            <p>I chose bspwm for window management but with the Debian Stable distribution instead of Testing. The
+                Stable version fulfills my primary needs:</p>
+            <ul>
+                <li>Next .NET LTS version will find its way into Debian 12 &dagger;. This is my expectation as the
+                    recent .NET versions of 6 and 7 were supported from Debian 10 through 12. </li>
+                <li>Python 3.11+ is available, which is good enough for my usecases.</li>
+                <li>Go is at a recent version of 1.22. So, no trouble.</li>
+            </ul>
+            <p>If an official package is not available for an app, we have the options of backports, flatpak, 3rd party
+                package repository and a .deb. Compiling from source exists too. As a last resort hopefully.</p>
+            <p>Alright, let's go.</p>
+            <h2>Make an install media</h2>
+            <p>Create a bootable USB with the Debian Stable NetInst ISO. I used Rufus for this.</p>
+            <p>Steps to do this, on your other computer:</p>
+            <ol>
+                <li>Download Debian Stable NetInst ISO from the Debian website.</li>
+                <li>Insert a USB drive </li>
+                <li>Download and run the Rufus executable</li>
+                <li>Create a bootable USB with the downloaded ISO</li>
+            </ol>
+            <p>Now we are ready to proceed with the graphical installation.</p>
+            <h2>Graphical installation</h2>
+            <p>Insert the bootable USB into the target computer.</p>
+            <ul>
+                <li>entire disk and setup lvm</li>
+                <li>/dev/nvme0n1 - 2.0 TB SKHynix_HFS002TEJ9X102N</li>
+                <li>separate /home /var /tmp</li>
+                <li>SSH server</li>
+                <li>standard system utilities</li>
+            </ul>
+            <h2>Post install configuration</h2>
+            <p>After logging in, install some essentials as root:</p>
+            <pre>su - root
+apt install curl wget apt-transport-https dirmngr sakura plocate
+</pre>
+            <p>As root, configure the login shell for readability:</p>
+            <pre>su - root
+dpkg-reconfigure console-setup
+    utf8
+    guess optiml
+    let select suitable font
+    12x24
+service console-setup restart
+systemctl reboot
+</pre>
+            <p>As root, install Xorg, the primary package for display management:</p>
+            <pre>su - root
+apt install xorg
+exit
+</pre>
+            <p>As non-root, create an .xinitrc file for xorg to run a window manager:</p>
+            <pre>touch .xinitrc
+nano .xinitrc
+# update file as such
+exec bspwm
+</pre>
+            <p>As root, install the window manager bspwm:</p>
+            <pre>su - root
+apt install bspwm polybar dmenu
+apt autoremove lemonbar
+exit
+</pre>
+            <p>As non-root, create a .config dir to hold config files needed for bspwm:</p>
+            <pre>mkdir .config
+mkdir .config/bspwm
+mkdir .config/sxhkd
+mkdir .config/polybar
+
+# or a one-liner
+mkdir -p .config/{bspwm,sxkhd,polybar}
+</pre>
+            <p>As root, copy necessary sample config files to the .config dir</p>
+            <pre>su - root
+cp /usr/share/doc/bspwm/examples/bspwmrc /home/ab/.config/bspwm/bspwmrc
+cp /usr/share/doc/bspwm/examples/sxhkdrc /home/ab/.config/sxhkd/sxhkdrc
+cp /usr/share/doc/polybar/examples/config.ini /home/ab/.config/polybar/config.ini
+</pre>
+            <p>As root, make the bspwmrc and sxhkdrc executables:</p>
+            <pre>chmod +x /home/ab/.config/bspwm/bspwmrc
+chmod +x /home/ab/.config/sxhkd/sxhkdrc
+</pre>
+            <p>As root, create a launch.sh file for the polybar taskbar program to run properly:</p>
+            <pre>cd .config/polybar
+touch launch.sh
+nano launch.sh
+
+# update file as such
+
+killall -q polybar
+while pgrep -u $UID -x polybar &gt;/dev/null; do sleep 1; done
+polybar bar1 2&gt;&amp;1 | tee -a /tmp/polybar-bar1.log &amp; disown
+</pre>
+            <p>As root, make the launch.sh executable:</p>
+            <pre>chmod +x launch.sh
+exit
+</pre>
+            <p>As non-root, run</p>
+            <pre>startx
+
+# worked!
+</pre>
+            <p>As root, add the non-root user into sudoers group:</p>
+            <pre>su - root
+apt install sudo
+usermod -aG sudo ab
+
+# to check logout and login again as ab
+sudo apt update
+</pre>
+            <p>Install chromium and firefox</p>
+            <pre>sudo apt install chromium firefox-esr
+
+# Note firefox-esr will be set as default x-www-bro
+sudo update-alternatives --display x-www-browser
+</pre>
+            <p>Install audio tools</p>
+            <pre># audio for firefox and chrome
+sudo apt install alsamixergui pulseaudio
+</pre>
+            <p>Notes:</p>
+            <p>&dagger; <em>and Debian 13, as well, most likely</em></p>
+        </article>
+    </main>
+
+    <footer>
+        Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built with html (for now)
+    </footer>
+    <style>
+        pre {
+            outline: 2px solid dodgerblue;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            padding: 5px;
+            overflow: auto
+        }
+    </style>
+</body>
+
+</html>
