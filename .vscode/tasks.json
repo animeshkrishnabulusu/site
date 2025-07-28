@@ -16,6 +16,8 @@
                 "--include='*.png'",
                 "--include='posts/'",
                 "--include='thoughts/'",
+                "--include='projects/'",
+                "--include='dashboard/'",
                 "--include='old/'",
                 "--exclude='*'",
                 ".",
