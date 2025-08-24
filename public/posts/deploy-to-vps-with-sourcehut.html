@@ -2,12 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta name="title" content="Animesh Krishna Bulusu" />
-    <link rel="canonical" href="https://log.baksignal.com/posts/deploy-to-vps-with-sourcehut" />
+    <meta name="title"
+        content="Animesh Krishna Bulusu" />
+    <link rel="canonical"
+        href="https://log.baksignal.com/posts/deploy-to-vps-with-sourcehut" />
     <meta charset="utf-8" />
-    <meta name="author" content="Animesh Krishna Bulusu" />
-    <meta name="copyright" content="Animesh Krishna Bulusu" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author"
+        content="Animesh Krishna Bulusu" />
+    <meta name="copyright"
+        content="Animesh Krishna Bulusu" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
     <style>
         html {
             color-scheme: light dark;
@@ -23,7 +28,7 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
                 "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            font-size: 18px;
+            font-size: 16px;
             line-height: 1.4;
             min-width: 320px;
             max-width: 540px;
@@ -49,7 +54,7 @@
         }
 
         h1 {
-            border-bottom: 5px solid dodgerblue;
+            border-bottom: 5px solid crimson;
             font-size: 28px;
             margin: 0;
         }
@@ -87,51 +92,48 @@
 </head>
 
 <body>
-    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a></header>
-
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a>
+    </header>
     <h1>Deploy to VPS with Sourcehut</h1>
     <h2>intro to a lightweight ci</h2>
     <main>
         <article>
-
             <div><time datetime="2022-09-02">Sep 2, 2022</time></div>
-
-            <p>
-                In this post, I will explore the deployment of a static blog from a SourceHut git repository to
-                a Linux VPS. These instructions are specific to the Lektor static site generator (ssg), but they
-                could easily apply to other static sites generators with minor modifications. This post assumes
-                some familiarity with bash, nginx and sysadmin things.
-            </p>
-            <p>
-                Create a <a href="https://meta.sr.ht/register">SourceHut account</a> first. Then create a
-                repository for a blog and push local changes to it. This repository must contain a Lektor blog.
-            </p>
+            <p> In this post, I will explore the deployment of a static blog
+                from a SourceHut git repository to a Linux VPS. These
+                instructions are specific to the Lektor static site generator
+                (ssg), but they could easily apply to other static sites
+                generators with minor modifications. This post assumes some
+                familiarity with bash, nginx and sysadmin things. </p>
+            <p> Create a <a href="https://meta.sr.ht/register">SourceHut
+                    account</a> first. Then create a repository for a blog and
+                push local changes to it. This repository must contain a Lektor
+                blog. </p>
             <blockquote>
-                <p>E.g. <a href="https://git.sr.ht/~username/myblog">https://git.sr.ht/~username/myblog</a></p>
+                <p>E.g. <a
+                        href="https://git.sr.ht/~username/myblog">https://git.sr.ht/~username/myblog</a>
+                </p>
             </blockquote>
-            <p>
-                SourceHut requires a build manifest <code>.build.yml</code> to build, test and deploy code.
-                Before such a manifest is created, we can test our build scripts on the SourceHut Builds UI.
-            </p>
+            <p> SourceHut requires a build manifest <code>.build.yml</code> to
+                build, test and deploy code. Before such a manifest is created,
+                we can test our build scripts on the SourceHut Builds UI. </p>
             <h2>add build manifest</h2>
-            <p>
-                Go to SourceHut Builds at <a href="https://builds.sr.ht">https://builds.sr.ht</a> and click
-                "Submit Manifest". Start with the smallest possible definition that has a single task 'greet'.
-                This is simply a bash command to echo a hello.
-            </p>
+            <p> Go to SourceHut Builds at <a
+                    href="https://builds.sr.ht">https://builds.sr.ht</a> and
+                click "Submit Manifest". Start with the smallest possible
+                definition that has a single task 'greet'. This is simply a bash
+                command to echo a hello. </p>
             <pre>
 image: debian/testing
 tasks:
   - greet: |
       echo hello
                 </pre>
-            <p>
-                Place this in the big textbox and click Submit. This will boot a Debian testing image and run
-                the single task 'greet'. The output is shown in two sections. One for the setup of the image and
-                the other for the sole task 'greet'.
-            </p>
+            <p> Place this in the big textbox and click Submit. This will boot a
+                Debian testing image and run the single task 'greet'. The output
+                is shown in two sections. One for the setup of the image and the
+                other for the sole task 'greet'. </p>
             <p><strong>Build output:</strong></p>
-
             <details open>
                 <summary>setup</summary>
                 <pre>
@@ -142,7 +144,6 @@ tasks:
 [#3338383] 2022/08/29 03:45:04 Running task greet
 </pre>
             </details>
-
             <details open>
                 <summary>greet</summary>
                 <pre>
@@ -151,31 +152,31 @@ tasks:
 </pre>
             </details>
             <pre>Build complete: success 2 seconds ago (took 8 seconds)</pre>
-            <p>Great. The build ran for 8 seconds. Two things to notice from the build output.</p>
+            <p>Great. The build ran for 8 seconds. Two things to notice from the
+                build output.</p>
             <ol>
-                <li>After the Debian image is booted, first thing that happens is sending of tasks.</li>
-                <li>
-                    The build job page reloaded once before it showed the greet step. This is facilitated by a
-                    tiny JavaScript snippet on the page. It uses the good old meta tag to do this.
-                </li>
+                <li>After the Debian image is booted, first thing that happens
+                    is sending of tasks.</li>
+                <li> The build job page reloaded once before it showed the greet
+                    step. This is facilitated by a tiny JavaScript snippet on
+                    the page. It uses the good old meta tag to do this. </li>
             </ol>
             <blockquote>
-                <p>
-                    Offtopic: This page reload snippet and some necessary JavaScript for payments are the only
-                    two pieces of JavaScript I found on the entire SourceHut suite yet.
-                </p>
+                <p> Offtopic: This page reload snippet and some necessary
+                    JavaScript for payments are the only two pieces of
+                    JavaScript I found on the entire SourceHut suite yet. </p>
             </blockquote>
-            <p>
-                It is now established how a build definition or a manifest is created for testing purposes.
-                Given the primary goal, the next steps are broken down like this:
-            </p>
+            <p> It is now established how a build definition or a manifest is
+                created for testing purposes. Given the primary goal, the next
+                steps are broken down like this: </p>
             <h2>setup build tasks</h2>
             <ol>
                 <li>Install lektor</li>
                 <li>Build static blog</li>
                 <li>Deploy to VPS</li>
             </ol>
-            <p>Before setting each of these three tasks up, update the build manifest as follows.</p>
+            <p>Before setting each of these three tasks up, update the build
+                manifest as follows.</p>
             <pre>image: debian/testing
 tasks:
   - install-lektor: |
@@ -185,7 +186,8 @@ tasks:
   - deploy-blog-to-server: |
       echo 'deploying blog to server'
 </pre>
-            <p>Submit this manifest simply by clicking on <strong>Edit and resubmit</strong>.</p>
+            <p>Submit this manifest simply by clicking on <strong>Edit and
+                    resubmit</strong>.</p>
             <p><strong>Build output:</strong></p>
             <details>
                 <summary>setup</summary>
@@ -221,14 +223,15 @@ deploying blog to server
 </pre>
             </details>
             <pre>Build complete: success 2 seconds ago (took 8 seconds)</pre>
-            <p>Again, all tasks are sent to the Debian image as per the <code>setup</code> section.</p>
+            <p>Again, all tasks are sent to the Debian image as per the
+                <code>setup</code> section.</p>
             <h2>1. install-lektor task</h2>
-            <p>Lektor is not packaged in Debian. Put this command in the install task.</p>
+            <p>Lektor is not packaged in Debian. Put this command in the install
+                task.</p>
             <p><code>sudo pip install lektor</code></p>
-            <p>
-                pip is a package installer for Python. So it is a build dependency for Lektor. Build
-                dependencies go into another section called <code>packages</code>.
-            </p>
+            <p> pip is a package installer for Python. So it is a build
+                dependency for Lektor. Build dependencies go into another
+                section called <code>packages</code>. </p>
             <pre>image: debian/testing
 packages:
   - pip
@@ -258,9 +261,8 @@ Setting up python3-minimal (3.10.6-1) ...
 Setting up python3-pip (22.2+dfsg-1) ...
 </pre>
             </details>
-            <p>
-                Full setup output is
-                <a href="https://paste.sr.ht/~animesh/8c6172e2b2f34e931d3e90586e36859da6678bfd">here</a>
+            <p> Full setup output is <a
+                    href="https://paste.sr.ht/~animesh/8c6172e2b2f34e931d3e90586e36859da6678bfd">here</a>
             </p>
             <details>
                 <summary>install-lektor</summary>
@@ -279,34 +281,31 @@ Installing collected packages: . . . .
 Successfully installed . . . .
 </pre>
             </details>
-            <p>
-                Full install-lektor output is
-                <a href="https://paste.sr.ht/~animesh/f56c3a58dc88caa6ffab1f3180d4496a628e4d82">here</a>
+            <p> Full install-lektor output is <a
+                    href="https://paste.sr.ht/~animesh/f56c3a58dc88caa6ffab1f3180d4496a628e4d82">here</a>
             </p>
             <pre>Build complete: success 2 seconds ago (took 41 seconds)</pre>
             <h2>2. build-static-blog task</h2>
-            <p>
-                Next, building the Lektor blog is straightforward. There is a <code>lektor build</code> sub
-                command with minimal arguments that does this.
+            <p> Next, building the Lektor blog is straightforward. There is a
+                <code>lektor build</code> sub command with minimal arguments
+                that does this. </p>
+            <p><code>lektor build --output-path public -f minify:html,css,js</code>
             </p>
-            <p><code>lektor build --output-path public -f minify:html,css,js</code></p>
-            <p>
-                This command builds all the markdown (.lr files in case of Lektor) files and outputs static HTML
-                files into the public directory. The flag <code>-f</code> is a build flag that allows plugins to
-                customize the pre and post build events. In this case, minify is a plugin that minifies&dagger;
-                static files of type .html, .css and .js.
-            </p>
+            <p> This command builds all the markdown (.lr files in case of
+                Lektor) files and outputs static HTML files into the public
+                directory. The flag <code>-f</code> is a build flag that allows
+                plugins to customize the pre and post build events. In this
+                case, minify is a plugin that minifies&dagger; static files of
+                type .html, .css and .js. </p>
             <blockquote>
-                <p>
-                    &dagger; Minification is a process of removing all unnecessary characters from static files
-                    without changing its functionality.
-                </p>
+                <p> &dagger; Minification is a process of removing all
+                    unnecessary characters from static files without changing
+                    its functionality. </p>
             </blockquote>
-            <p>
-                A git repository that holds the blog (or a site) is required. Specify that git repository that
-                was created earlier in a <code>sources</code> section. This repository is automatically cloned
-                in the current working directory ahead of the tasks.
-            </p>
+            <p> A git repository that holds the blog (or a site) is required.
+                Specify that git repository that was created earlier in a
+                <code>sources</code> section. This repository is automatically
+                cloned in the current working directory ahead of the tasks. </p>
             <pre>image: debian/testing
 packages:
   - pip
@@ -348,16 +347,16 @@ Error: Could not automatically discover project.  A Lektor project must exist in
 </pre>
             </details>
             <pre>Build complete: failed 3 seconds ago (took 34 seconds) </pre>
-            <p>
-                The <code>build-lektor-blog</code> has failed. The error says that Lektor couldn't find the
-                lektor repository. The <code>setup</code> task has new lines that highlight that the git
-                repository is indeed cloned. It then moves (cd) into the <code>myblog</code> directory and does
-                a <code>git submodule update --init</code>. So why did the <code>build-lektor-blog</code> fail?
-            </p>
-            <p>
-                SourceHut build tasks seem to do a <code>popd</code> after a task finishes successfully.
-                Subsequent tasks need to cd into the cloned repository directory. It is a simple fix.
-            </p>
+            <p> The <code>build-lektor-blog</code> has failed. The error says
+                that Lektor couldn't find the lektor repository. The
+                <code>setup</code> task has new lines that highlight that the
+                git repository is indeed cloned. It then moves (cd) into the
+                <code>myblog</code> directory and does a
+                <code>git submodule update --init</code>. So why did the
+                <code>build-lektor-blog</code> fail? </p>
+            <p> SourceHut build tasks seem to do a <code>popd</code> after a
+                task finishes successfully. Subsequent tasks need to cd into the
+                cloned repository directory. It is a simple fix. </p>
             <pre>image: debian/testing
 packages:
   - pip
@@ -404,76 +403,68 @@ U static/simple.css
 Finished build in 5.89 sec
 </pre>
             </details>
-            <p>
-                Full build-lektor-blog output is
-                <a href="https://paste.sr.ht/~animesh/497a48defbd443a9d19a9652c1c5bd27e3d4374f">here</a>.
+            <p> Full build-lektor-blog output is <a
+                    href="https://paste.sr.ht/~animesh/497a48defbd443a9d19a9652c1c5bd27e3d4374f">here</a>.
             </p>
             <pre>Build complete: success 4 seconds ago (took 41 seconds)</pre>
             <p>The public directory now has all the static HTML files.</p>
             <h2>3. deploy-to-server task</h2>
-            <p>
-                The final step is to deploy the public directory into a Linux server. Login to the Linux server:
-            </p>
+            <p> The final step is to deploy the public directory into a Linux
+                server. Login to the Linux server: </p>
             <pre>ssh my-linx-server</pre>
-            <p>
-                Create a separate user to handle the deployment of the static blog. The <code>-m</code> flag
-                creates a home directory for this user.
-            </p>
+            <p> Create a separate user to handle the deployment of the static
+                blog. The <code>-m</code> flag creates a home directory for this
+                user. </p>
             <pre>$ sudo useradd -m deploy</pre>
-            <p>
-                Give this user permission to update the /var/www directory. Add the user deploy to a group
-                called <code>www-data</code> This involves a few steps.
-            </p>
+            <p> Give this user permission to update the /var/www directory. Add
+                the user deploy to a group called <code>www-data</code> This
+                involves a few steps. </p>
             <pre>$ sudo usermod -aG www-data deploy</pre>
             <p>Verify that the user is added the group:</p>
             <pre>$ grep ^www-data /etc/group</pre>
-            <p>
-                Change the group ownership of the <code>/var/www</code> to the <code>www-data</code> group. This
-                is so that file and directory modifications are limited to users from a single group:
-            </p>
+            <p> Change the group ownership of the <code>/var/www</code> to the
+                <code>www-data</code> group. This is so that file and directory
+                modifications are limited to users from a single group: </p>
             <pre>$ sudo chgrp www-data /var/www/</pre>
             <p>Add read, write and execute permissions to the group owner:</p>
             <pre>$ sudo chmod g+rwx /var/www</pre>
-            <p>Make the deploy user the owner for the specific directory under <code>/var/www</code>.</p>
+            <p>Make the deploy user the owner for the specific directory under
+                <code>/var/www</code>.</p>
             <pre>$ sudo chown deploy:www-data /var/www/myblog/ -R</pre>
-            <p>
-                This assumes that the <code>myblog</code> directory was created as part of the nginx server
-                setup and configuration. If it wasn't earlier, then create the <code>myblog</code> directory
-                manually and then configure for nginx later as needed.
-            </p>
-            <p>
-                With this, the deployment user is created and configured with the right permissions. Now, log in
-                as the deploy user to generate an SSH key. The <code>cd</code> at the end is to go to the home
-                directory of this user.
-            </p>
+            <p> This assumes that the <code>myblog</code> directory was created
+                as part of the nginx server setup and configuration. If it
+                wasn't earlier, then create the <code>myblog</code> directory
+                manually and then configure for nginx later as needed. </p>
+            <p> With this, the deployment user is created and configured with
+                the right permissions. Now, log in as the deploy user to
+                generate an SSH key. The <code>cd</code> at the end is to go to
+                the home directory of this user. </p>
             <pre>$ sudo su deploy &amp;&amp; cd
 $ pwd
 /home/deploy
 </pre>
-            <p>
-                Generate ssh key. Note that the newer Ed25519 scheme is not yet supported in SourceHut Builds.
-                Leave the passphrase as empty.
+            <p> Generate ssh key. Note that the newer Ed25519 scheme is not yet
+                supported in SourceHut Builds. Leave the passphrase as empty.
             </p>
             <pre>$ ssh-keygen</pre>
-            <p>
-                Append the generated public key into the <code>authorized_keys</code> file. This file maintains
-                a list of authorized public keys that are allowed access into this server. When a client tries
-                to authenticate with ssh into this server, it verifies its public key against this file.
-            </p>
+            <p> Append the generated public key into the
+                <code>authorized_keys</code> file. This file maintains a list of
+                authorized public keys that are allowed access into this server.
+                When a client tries to authenticate with ssh into this server,
+                it verifies its public key against this file. </p>
             <pre>$ cat .ssh/id_rsa.pub &gt;&gt; .ssh/authorized_keys</pre>
-            <p>Display the generated private key. Copy this manually to the clipboard.</p>
+            <p>Display the generated private key. Copy this manually to the
+                clipboard.</p>
             <pre>$ cat .ssh/id_rsa</pre>
-            <p>
-                This public and private key combination is our authentication mechanism from SourceHut Builds
-                into the Linux server.
-            </p>
-            <p>
-                To enable this from the SourceHut Builds side, go to the secrets management dashboard
-                <a href="https://builds.sr.ht/secrets">https://builds.sr.ht/secrets</a> and paste the private
-                key into the Secret textbox. Select the SSH Key as the secret type and add this secret. Creating
-                this secret will generate a UUID. This UUID is used directly in the builds to identify a
-                particular secret.
-            </p>
+            <p> This public and private key combination is our authentication
+                mechanism from SourceHut Builds into the Linux server. </p>
+            <p> To enable this from the SourceHut Builds side, go to the secrets
+                management dashboard <a
+                    href="https://builds.sr.ht/secrets">https://builds.sr.ht/secrets</a>
+                and paste the private key into the Secret textbox. Select the
+                SSH Key as the secret type and add this secret. Creating this
+                secret will generate a UUID. This UUID is used directly in the
+                builds to identify a particular secret. </p>
             <p>Add this UUID to our build manifest.</p>
             <pre>image: debian/testing
 secrets:
@@ -489,17 +480,16 @@ tasks:
       cd myblog
       lektor build --output-path public -f minify:html,css,js
 </pre>
-            <p>
-                The directory and the permissions are ready. Using a copy command is the final step. The
-                <code>rsync</code> command is a standard for this purpose.
-            </p>
+            <p> The directory and the permissions are ready. Using a copy
+                command is the final step. The <code>rsync</code> command is a
+                standard for this purpose. </p>
             <pre>$ rsync -r public/* deploy@mylinuxserver-hostname:/var/www/myblog/ -e "ssh -o StrictHostKeyChecking=no"</pre>
-            <p>
-                This command recursively copies all content from the public directory into
-                <code>/var/www/myblog/</code> directory of the specified hostname as the user deploy using the
-                ssh command. I suggest trying with rsync locally first to understand potential issues. Also,
-                <code>rsync</code> is not available in Debian/testing image by default. Add it as a package.
-            </p>
+            <p> This command recursively copies all content from the public
+                directory into <code>/var/www/myblog/</code> directory of the
+                specified hostname as the user deploy using the ssh command. I
+                suggest trying with rsync locally first to understand potential
+                issues. Also, <code>rsync</code> is not available in
+                Debian/testing image by default. Add it as a package. </p>
             <pre>image: debian/testing
 secrets:
 - c9394238-41de-4b43-a2f9-4609df0d7896
@@ -555,26 +545,24 @@ Warning: Permanently added '[myblog]' to the list of known hosts.
 
 </pre>
             </details>
-            <p>
-                If the deploy-to-server task is successful, ssh into the server and verify that all blog content
-                is available at <code>/var/www/myblog</code> directory.
-            </p>
-            <p>
-                Commonly static blog users prefer to deploy to the server each time a new post/article is pushed
-                to the server. To enable this, copy the build manifest from the most recent successful build and
-                create a build manifest file <code>.build.yml</code> with these contents at the root of the
-                blog's git repository.
-            </p>
-            <p>
-                Now, each <code>git push</code> to the blog's repository results in a new build automatically.
-                The output from the push message displays the link to the build as an added convenience.
-            </p>
+            <p> If the deploy-to-server task is successful, ssh into the server
+                and verify that all blog content is available at
+                <code>/var/www/myblog</code> directory. </p>
+            <p> Commonly static blog users prefer to deploy to the server each
+                time a new post/article is pushed to the server. To enable this,
+                copy the build manifest from the most recent successful build
+                and create a build manifest file <code>.build.yml</code> with
+                these contents at the root of the blog's git repository. </p>
+            <p> Now, each <code>git push</code> to the blog's repository results
+                in a new build automatically. The output from the push message
+                displays the link to the build as an added convenience. </p>
         </article>
     </main>
-    <footer>Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built with html</footer>
+    <footer>Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA
+        4.0<br />Built with html</footer>
     <style>
         pre {
-            outline: 2px solid dodgerblue;
+            outline: 2px solid crimson;
             border-radius: 4px;
             font-size: 0.95rem;
             padding: 5px;

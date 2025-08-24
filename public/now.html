@@ -21,7 +21,7 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
                 "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-            font-size: 18px;
+            font-size: 16px;
             line-height: 1.4;
             min-width: 320px;
             max-width: 540px;
@@ -47,7 +47,8 @@
         }
 
         h1 {
-            border-bottom: 5px solid dodgerblue;
+            border-bottom: 5px solid crimson;
+
             font-size: 28px;
             margin: 0;
         }
@@ -94,17 +95,32 @@
     <h2>my current year activities</h2>
 
     <main>
+
+        <p>
+            The Now page lists my activities for the current year. Previous years are archived on the <a
+                href="/year-reviews">year-reviews</a> page.
+            Those older entries remain in their original form, which included both plans for the future and updates from
+            the time, preserved here for historical context.
+        </p>
+
+        <h3>2025</h3>
         <ol>
             <li>Building my Debian Linux desktop workstation.
             <li>Working on a personal static site generator.
             <li>Having fun with LLMs as an end user.
             <li>Planned on a crazy twist in life.
         </ol>
-        <p>Inspired by <a href="https://nownownow.com/about" target="_blank">now page</a>.</p>
+        <p>Inspired by <a href="https://nownownow.com/about" target="_blank">now page</a> by <a
+                href="https://sive.rs/">Derek Sivers</a>.</p>
     </main>
     <footer>
         Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built with html
     </footer>
+    <style>
+        h3 {
+            border-bottom: 2px solid #eee;
+        }
+    </style>
 </body>
 
 </html>
