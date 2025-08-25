@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="title" content="Animesh Krishna Bulusu" />
+    <link rel="canonical" href="https://log.baksignal.com/posts/fun-with-llm-1" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Animesh Krishna Bulusu" />
+    <meta name="copyright" content="Animesh Krishna Bulusu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer,
+        h1,
+        h1+h2 {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: end;
+        }
+
+        header a {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        h1 {
+            color: crimson;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>Fun with an LLM | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a>
+    </header>
+    <h1>Fun with an LLM 1</h1>
+    <h2>Adventures with a LLM</h2>
+    <main>
+        <article>
+            <div><time datetime="2025-08-23">Aug 23, 2025</time></div>
+            <p>Last week I was aggregating several practice projects into a git repository with
+                one single solution (.sln). I looked through some files and realized how much
+                stuff needed updates. One of them was a piece of code that sorted an integer
+                list based on the selected sorting strategy. I had this written down many years
+                ago while trying to get into common GoF design patterns. </p>
+            <pre>var unsortedList = new List&lt;int&gt; { 19, 9, 48, 3, 11, 41 };
+
+var sorter = new Sorter(new BubbleSortStrategy());
+sorter.Sort(unsortedList); 
+
+sorter = new Sorter(new QuickSortStrategy());
+sorter.Sort(unsortedList);</pre>
+            <p>As a pesky believer of boy scout principle, I had to make some change here.
+                Should I implement the sorts? - it means a quick re-learning of sorting
+                algorithms; should I update the project to dotnet v9/10 - easy and not so
+                interesting; should I benchmark the sorting approaches? - sounds interesting.
+                Let's do this. I kept postponing this activity for quite some time now, so I
+                thanked my brain for the timely recollection.
+            <p>Immediately I pasted the snippet into a big-LLM and asked it<sup>*</sup> to get
+                me started with benchmarking code. It gave me a lot of code specific to
+                BenchmarkDotNet.
+            <blockquote><sup>*</sup> Due to the big-LLMs, some lazy programmers become dumber
+                (sample size = 1). Emphasis on the dumb. </blockquote>
+            <p>The good part was that the code worked without having to change the benchmarking
+                part at all. It took about 10 minutes. The bad part was I was lost looking at
+                all the code. How did it make a certain decision to write a code in a particular
+                way? On top of that, I had no idea why a particular thing had been written in
+                such a way. Is it at advanced expertise? Is it the most fundamental way of
+                writing BenchmarkDotNet?
+            <p>The one thing I was certain of was that the output code was useful in exact
+                specific context of sorting. It could not be genericized in a way that would
+                fits various use-cases and problems. I could not take away the parts I would
+                call a building block. If I were to adapt the code to something else say a
+                complex business logic involving come computation and a bunch of I/O-bound
+                calls, I would be staring at the screen for a long time.</p>
+            <p> This is what one gets when they don't go straight to the documentation. I do
+                admit that my original prompt was limited. I actually know how to write an
+                extensive prompt to get what I want. However that is a lot of work. I'd rather
+                spend that work writing my code and benchmarking code, and tweaking all of it.
+            </p>
+            <p>So I told the big-LLM nicely that this works only for the sorting and that I want
+                to know how to benchmark all sorts of code. It took me a while to get a list of
+                useful things. Things like best practices, things to keep in mind,
+                dos-and-donts, one page checklist. However, after a few prompts, I realized all
+                of this would never be my hard-earned knowledge and experience. I would have to
+                first pay my time dues in getting to know the ins and outs of BenchmarkDotNet. I
+                have this need to know things at a deeper level first. Then I am happy to forget
+                that for long periods of time and come back to it at a later point in time. At
+                which point, then asking a big-LLM is probably better. Benchmarking is one such
+                area of expertise that is always worth the showcase especially both in
+                enterprise and in the open-source world</p>
+            <p>In the one of the next posts, I will document my learnings of using
+                BenchmarkDotNet appropriately for a wide variety of use-cases. At least some
+                common ones, hopefully.</p>
+            <p>My key lessons from this activity are, in this order:</p>
+            <ol>
+                <li>For important areas of expertise, start with and consult the documentation,
+                    and then build on top of that knowledge.</li>
+                <li>Then consult a big-LLM, and keep prompts as specific as possible for
+                    real-world usefulness.</li>
+            </ol>
+        </article>
+    </main>
+    <footer> Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />built
+        with html </footer>
+    <style>
+        sup {
+            padding: 3px;
+            font-weight: bold;
+        }
+
+        blockquote {
+            border-left: 4px solid seagreen;
+            padding-left: 10px;
+            margin-left: 2em;
+        }
+
+        pre {
+            outline: 2px solid seagreen;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            padding: 5px;
+            overflow: auto
+        }
+    </style>
+</body>
+
+</html>
