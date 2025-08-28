@@ -24,38 +24,58 @@
             font-size: 16px;
             line-height: 1.4;
             min-width: 320px;
-            max-width: 420px;;
+            max-width: 480px;
+            ;
             margin: 0 auto;
         }
 
         header,
         main,
-        footer,
-        h1,
-        h1+h2 {
+        footer {
             padding: 0 7px;
         }
 
         header {
             display: flex;
-            justify-content: end;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
         }
 
-        header a {
-            font-size: 1.2rem;
-            margin-left: 10px;
+        nav {
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        nav a {
+            text-decoration: none;
+            margin: 0 2px;
+            padding: 4px;
+            background-color: #eeeeee;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        @media (max-width: 420px) {
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            header {
+                border-bottom: 1px solid #ccc;
+            }
         }
 
         h1 {
             color: crimson;
-
             font-size: 28px;
             margin: 0;
         }
 
         h2 {
             font-size: 24px;
-
             margin-top: 0;
         }
 
@@ -87,22 +107,19 @@
 
 <body>
     <header>
-        <a href="/">home</a>
-        <a href="/now">now</a>
-        <a href="/posts">posts</a>
+        <h1>Now</h1>
+        <nav>
+            <a href="/">home</a>
+            <a href="/about">about</a>
+            <a href="/posts">posts</a>
+        </nav>
     </header>
-    <h1>Now</h1>
-    <h2>my current year activities</h2>
-
     <main>
-
-        <p>
-            The Now page lists my activities for the current year. Previous years are archived on the <a
-                href="/year-reviews">year-reviews</a> page.
-            Those older entries remain in their original form, which included both plans for the future and updates from
-            the time, preserved here for historical context.
-        </p>
-
+        <h2>My current year activities</h2>
+        <p> The Now page lists my activities for the current year. Previous years are archived
+            on the <a href="/year-reviews">year-reviews</a> page. Those older entries remain in
+            their original form, which included both plans for the future and updates from the
+            time, preserved here for historical context. </p>
         <h3>2025</h3>
         <ol>
             <li>Building my Debian Linux desktop workstation.
@@ -111,11 +128,10 @@
             <li>Planned on a crazy twist in life.
         </ol>
         <p>Inspired by <a href="https://nownownow.com/about" target="_blank">now page</a> by <a
-                href="https://sive.rs/">Derek Sivers</a>.</p>
+               href="https://sive.rs/">Derek Sivers</a>.</p>
     </main>
-    <footer>
-        Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built with html
-    </footer>
+    <footer> Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built
+        with html </footer>
     <style>
         h3 {
             border-bottom: 2px solid #eee;

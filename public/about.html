@@ -24,27 +24,48 @@
             font-size: 16px;
             line-height: 1.4;
             min-width: 320px;
-            max-width: 420px;
+            max-width: 480px;
             ;
             margin: 0 auto;
         }
 
         header,
         main,
-        footer,
-        h1,
-        h1+h2 {
+        footer {
             padding: 0 7px;
         }
 
         header {
             display: flex;
-            justify-content: end;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
         }
 
-        header a {
-            font-size: 1.2rem;
-            margin-left: 10px;
+        nav {
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        nav a {
+            text-decoration: none;
+            margin: 0 2px;
+            padding: 4px;
+            background-color: #eeeeee;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        @media (max-width: 420px) {
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            header {
+                border-bottom: 1px solid #ccc;
+            }
         }
 
         h1 {
@@ -86,19 +107,23 @@
 
 <body>
     <header>
-        <a href="/">home</a>
-        <a href="/now">now</a>
-        <a href="/posts">posts</a>
+        <h1>About</h1>
+        <nav>
+            <a href="/">home</a>
+            <a href="/now">now</a>
+            <a href="/posts">posts</a>
+        </nav>
     </header>
-    <h1>About?</h1>
-    <h2>an explainer</h2>
     <main>
+        <h2>An explainer</h2>
         <dl>
             <dt>Who are you?</dt>
             <dd>I am the creator of this site and my name is Animesh Krishna Bulusu. </dd>
             <dt>But, who are you?</dt>
             <dd>A lifelong learner and an explorer. A sysadmin masquerading as a developer. I do
-                photography sometimes. </dd>
+                photography sometimes. I adhere to principles of discipline and habit, embrace
+                karma and kaizen, view everything as an experiment, and hold strong opinions
+                loosely.</dd>
             <dt>Where are you from?</dt>
             <dd>I am from Vizag, India.</dd>
             <dt>What is baksignal?</dt>
@@ -111,10 +136,10 @@
             <dd>Me and possibly some friends. Anything more than that is a bonus.</dd>
             <dt>Why write a blog if no one else reads?</dt>
             <dd>Writing forces you to think about what you know, your assumptions, your
-                unknowns, your blind spots, and more. One can also give structure to their
-                thoughts, improve thought process, showcase skills and gain potential employment
-                opportunities. I firmly believe that everyone should have a small blog for
-                themselves.</dd>
+                unknowns, your blind spots, and possibly more. One can also give structure to
+                their thoughts, improve thought process, showcase skills and gain potential
+                employment opportunities. I firmly believe that everyone should have a small
+                blog for themselves.</dd>
             <dt>Will you help me create a blog?</dt>
             <dd>Yes. <a
                    href="https://tenor.com/en-GB/search/did-we-just-become-best-friends-gifs"

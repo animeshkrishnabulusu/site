@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Now page of Animesh Krishna Bulusu" />
+    <link rel="shortcut icon" href="/favicon.ico" sizes="16x16" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        nav {
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        nav a {
+            text-decoration: none;
+            margin: 0 2px;
+            padding: 4px;
+            background-color: #eeeeee;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        @media (max-width: 420px) {
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            header {
+                border-bottom: 1px solid #ccc;
+            }
+        }
+
+        h1 {
+            color: crimson;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>Projects | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+    <header>
+        <h1>Projects</h1>
+        <nav>
+            <a href="/">home</a>
+            <a href="/about">about</a>
+            <a href="/now">now</a>
+            <a href="/posts">posts</a>
+        </nav>
+    </header>
+    <main>
+        <h2>My experiments catalog</h2>
+        <p> This page is a record of what I've built, explored, or worked on. Each project may
+            be technical or otherwise, and may or may not have a related blog post. If a story
+            exists, you'll find it linked; otherwise, the project page itself shares the
+            progress and learnings. </p>
+        <section>
+            <h3>Linux on desktop</h3>
+            <span class="status development"></span>
+            <div>On using Linux as a daily driver</div>
+            <ul>
+                <li><a href="/posts/linux-jump">Origin Story</a>
+                <li><a href="/projects/linux-on-desktop">Project Details</a>
+            </ul>
+        </section>
+        <section>
+            <h3>yzag</h3>
+            <span class="status planning"></span>
+            <div>Yet another static site generator</div>
+            <ul>
+                <li><a href="/posts/goodbye-lektor">Origin Story</a>
+                <li><a href="/projects/yzag">Project Details</a>
+        </section>
+    </main>
+    <footer> Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built
+        with html </footer>
+    <style>
+        h3 {
+            display: inline-block;
+        }
+
+        section {
+            margin-bottom: 15px;
+            padding: 0 2px;
+        }
+
+        .status {
+            width: fit-content;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.3rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: transparent;
+            border: 1px solid var(--status-color);
+            color: var(--status-ink, var(--status-color));
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .status {
+                --status-ink: color-mix(in oklab, var(--status-color) 85%, white);
+            }
+        }
+
+        .status.concept {
+            --status-color: #33CCCC;
+        }
+
+        .status.planning {
+            --status-color: #FFCC33;
+        }
+
+        .status.development {
+            --status-color: #3366FF;
+        }
+
+        .status.launched {
+            --status-color: #33CC33;
+        }
+
+        .status.maintenance {
+            --status-color: #FF9900;
+        }
+
+        .status.closed {
+            --status-color: #999999;
+        }
+
+        .status.canceled {
+            --status-color: #CC3333;
+        }
+
+        .status.planning {
+            --status-ink: color-mix(in oklab, var(--status-color) 60%, black);
+        }
+
+        .status.concept::before {
+            content: "concept";
+        }
+
+        .status.planning::before {
+            content: "planning";
+        }
+
+        .status.development::before {
+            content: "development";
+        }
+
+        .status.launched::before {
+            content: "launched";
+        }
+
+        .status.maintenance::before {
+            content: "maintenance";
+        }
+
+        .status.closed::before {
+            content: "closed";
+        }
+
+        .status.canceled::before {
+            content: "canceled";
+        }
+    </style>
+</body>
+
+</html>

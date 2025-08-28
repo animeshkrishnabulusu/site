@@ -24,38 +24,58 @@
             font-size: 16px;
             line-height: 1.4;
             min-width: 320px;
-            max-width: 420px;;
+            max-width: 480px;
+            ;
             margin: 0 auto;
         }
 
         header,
         main,
-        footer,
-        h1,
-        h1+h2 {
+        footer {
             padding: 0 7px;
         }
 
         header {
             display: flex;
-            justify-content: end;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
         }
 
-        header a {
-            font-size: 1.2rem;
-            margin-left: 10px;
+        nav {
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        nav a {
+            text-decoration: none;
+            margin: 0 2px;
+            padding: 4px;
+            background-color: #eeeeee;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            header {
+                border-bottom: 1px solid #ccc;
+            }
         }
 
         h1 {
             color: crimson;
-
             font-size: 28px;
             margin: 0;
         }
 
         h2 {
             font-size: 24px;
-
             margin-top: 0;
         }
 
@@ -82,193 +102,228 @@
             font-size: 0.8rem;
         }
     </style>
-    <title>Now | Animesh Krishna Bulusu</title>
+    <title>Now (prev) | Animesh Krishna Bulusu</title>
 </head>
 
 <body>
     <header>
-        <a href="/">home</a>
-        <a href="/now">now</a>
-        <a href="/posts">posts</a>
+        <h1>Year reviews</h1>
+        <nav>
+            <a href="/">home</a>
+            <a href="/now">now</a>
+            <a href="/posts">posts</a>
+        </nav>
     </header>
-    <h1>Year reviews</h1>
-    <h2>my previous year activities</h2>
-
     <main>
+        <h2>My previous year activities</h2>
         <details>
             <summary>2022</summary>
-            <p>2022 is a post covid year for me. The first few months were a blur. I processed lesser as the days went
-                by. I produced almost nothing. People wouldn't understand. People wouldn't want to understand. For I am
-                not unique. Everyone had troubled times. Everyone suffered in their own ways.</p>
-            <p>I worked on a team that helped migrate a customer from CloudFormation to Terraform. It is a total
-                paradigm shift personally. On the bright side, I got a good glimpse into insfrastructure as code,
-                Terraform, and IAC based strategies. I have gained a massive appreciation for IAC based DevOps.</p>
-            <p>One thing I achieved is the AWS solution architect associate certification. The saying that goes on the
-                lines of "The more we know, we realize how much we don't know" is never more truer. But anyway, with a
-                happy sigh, I am onto the professional one now.</p>
-            <p>I have watched 4 films at the theater. It was an unexpected and a pleasant surprise. 2019 was my best
-                year for moviegoing with 2 films for many years until then. And then, this year outdoes that year by
-                200%. It was a surprise because I realized that there are still some kinds of movies that I would love
-                to watch.</p>
+            <p>2022 is a post covid year for me. The first few months were a blur. I processed
+                lesser as the days went by. I produced almost nothing. People wouldn't
+                understand. People wouldn't want to understand. For I am not unique. Everyone
+                had troubled times. Everyone suffered in their own ways.</p>
+            <p>I worked on a team that helped migrate a customer from CloudFormation to
+                Terraform. It is a total paradigm shift personally. On the bright side, I got a
+                good glimpse into insfrastructure as code, Terraform, and IAC based strategies.
+                I have gained a massive appreciation for IAC based DevOps.</p>
+            <p>One thing I achieved is the AWS solution architect associate certification. The
+                saying that goes on the lines of "The more we know, we realize how much we don't
+                know" is never more truer. But anyway, with a happy sigh, I am onto the
+                professional one now.</p>
+            <p>I have watched 4 films at the theater. It was an unexpected and a pleasant
+                surprise. 2019 was my best year for moviegoing with 2 films for many years until
+                then. And then, this year outdoes that year by 200%. It was a surprise because I
+                realized that there are still some kinds of movies that I would love to watch.
+            </p>
             <h3>Learnings</h3>
             <ul>
-                <li>Write IAC code and make mistakes from day one. There is no time to do deep thoughts and analysis.
-                </li>
-                <li>Working with DevOps engineers and working as a DevOps engineer are completely different things. The
-                    experience of understanding Linux and command line things well does not translate into being an
-                    effective DevOps engineer. Practice my friend.</li>
-                <li>We cannot summon god mode productivity and discipline on command. It is a myth. It is either your
-                    overinflated ego or your ADHD talking. It doesn't work like that. While god mode is possible, we
-                    must first be a karmayogi<sup>1</sup>. This ties in with my existing beliefs of goals vs systems. To
-                    become a karmayogi, one must first build on systems. Systems, in turn, are built on habits.</li>
+                <li>Write IAC code and make mistakes from day one. There is no time to do deep
+                    thoughts and analysis. </li>
+                <li>Working with DevOps engineers and working as a DevOps engineer are
+                    completely different things. The experience of understanding Linux and
+                    command line things well does not translate into being an effective DevOps
+                    engineer. Practice my friend.</li>
+                <li>We cannot summon god mode productivity and discipline on command. It is a
+                    myth. It is either your overinflated ego or your ADHD talking. It doesn't
+                    work like that. While god mode is possible, we must first be a
+                    karmayogi<sup>1</sup>. This ties in with my existing beliefs of goals vs
+                    systems. To become a karmayogi, one must first build on systems. Systems, in
+                    turn, are built on habits.</li>
             </ul>
             <h3>Travel</h3>
-            <p>I traveled slightly better than <a href="/2021">previous year</a>. These are some pictures from this
-                year.</p>
-            <p><img src="https://i.imgur.com/FNmrSzT.jpg" alt="Summer, somewhere in Hyderabad" width="400"
-                    height="300" /></p>
+            <p>I traveled slightly better than <a href="/2021">previous year</a>. These are some
+                pictures from this year.</p>
+            <p><img src="https://i.imgur.com/FNmrSzT.jpg" alt="Summer, somewhere in Hyderabad"
+                     loading="lazy" width="400" height="300" /></p>
             <figcaption>Summer, somewhere in Hyderabad</figcaption>
-            <p><img src="https://i.imgur.com/SJpqm60.jpg" alt="Temple, Kolhapur" loading="lazy" width="400"
-                    height="300" /></p>
+            <p><img src="https://i.imgur.com/SJpqm60.jpg" alt="Temple, Kolhapur" loading="lazy"
+                     width="400" height="300" /></p>
             <figcaption>Temple, Kolhapur</figcaption>
-            <p><img src="https://i.imgur.com/yil20a0.gif" alt="Visakhapatnam beach " loading="lazy" width="400"
-                    height="300" /></p>
+            <p><img src="https://i.imgur.com/yil20a0.gif" alt="Visakhapatnam beach "
+                     loading="lazy" width="400" height="300" /></p>
             <figcaption>Beach, the best of the places in Telugu states</figcaption>
-            <p><img src="https://i.imgur.com/1AlIIw7.jpg" alt="Somewhere near Araku" loading="lazy" width="400"
-                    height="300" /></p>
+            <p><img src="https://i.imgur.com/1AlIIw7.jpg" alt="Somewhere near Araku"
+                     loading="lazy" width="400" height="300" /></p>
             <figcaption>Somewhere near Araku</figcaption>
-            <p><img src="https://i.imgur.com/MItqgKF.jpg" alt="Winter, somewhere in Hyderabad" loading="lazy"
-                    width="400" height="300" /></p>
+            <p><img src="https://i.imgur.com/MItqgKF.jpg" alt="Winter, somewhere in Hyderabad"
+                     loading="lazy" width="400" height="300" /></p>
             <figcaption>Winter, somewhere in Hyderabad</figcaption>
             <h3>Miscellaneous</h3>
             <b>Quotes</b>
             <p><strong>on creation</strong></p>
             <blockquote>
-                <p><em>when you don’t create things, you become defined by your tastes rather than ability. your tastes
-                        only narrow &amp; exclude people. so create.</em> &mdash; _why</p>
+                <p><em>when you don't create things, you become defined by your tastes rather
+                        than ability. your tastes only narrow &amp; exclude people. so
+                        create.</em> &mdash; _why</p>
             </blockquote>
             <p><strong>on special needs children</strong></p>
             <blockquote>
-                <p><em>Picasso said it took four years to paint like Raphael but a lifetime to paint like a child. They
-                        live in a delightful space somewhere between dreams and reality. They taste color, hear shapes,
-                        see sounds. We should all have such special needs.</em> &mdash; Raymond Reddington<sup>2</sup>
+                <p><em>Picasso said it took four years to paint like Raphael but a lifetime to
+                        paint like a child. They live in a delightful space somewhere between
+                        dreams and reality. They taste color, hear shapes, see sounds. We should
+                        all have such special needs.</em> &mdash; Raymond Reddington<sup>2</sup>
                 </p>
             </blockquote>
             <p><strong>on action</strong></p>
             <blockquote>
-                <p><em>The proof that one truly believes is in action.</em> &mdash; Bayard Rustin</p>
+                <p><em>The proof that one truly believes is in action.</em> &mdash; Bayard
+                    Rustin</p>
             </blockquote>
             <h3>Random thoughts</h3>
             <p>The Gentlemen Frog or more canonically The Colonel Toad<sup>3</sup></p>
-            <p><img src="https://i.imgur.com/pv5dqw5.png" alt="The Gentlemen Frog or more canonically The Colonel Toad"
-                    loading="lazy" width="400" height="300" /></p>
-            <p>I don't know why yet but I love this meme. This image of a frog wearing a suit communicating that
-                <em>they</em> either had some form of a personal and/or a professional success or just wanted to state
-                something obvious. I used this recently to announce a professional achievement. It was a delight.
-            </p>
+            <p><img src="https://i.imgur.com/pv5dqw5.png"
+                     alt="The Gentlemen Frog or more canonically The Colonel Toad"
+                     loading="lazy" width="400" height="300" /></p>
+            <p>I don't know why yet but I love this meme. This image of a frog wearing a suit
+                communicating that <em>they</em> either had some form of a personal and/or a
+                professional success or just wanted to state something obvious. I used this
+                recently to announce a professional achievement. It was a delight. </p>
             <p><strong>References</strong></p>
-            <p>1- <a href="https://www.thegaudiyatreasuresofbengal.com/2022/05/07/who-is-a-karma-yogi-bhagavad-gita/">Who
-                    is a karma yogi</a><br>
-                2- <a href="https://en.wikipedia.org/wiki/The_Blacklist#Main_cast">Raymond Reddington</a><br>
-                3- <a href="https://imgflip.com/meme/294875301/Gentleman-frog">Gentlemen Frog</a></p>
+            <p>1- <a
+                   href="https://www.thegaudiyatreasuresofbengal.com/2022/05/07/who-is-a-karma-yogi-bhagavad-gita/">Who
+                    is a karma yogi</a><br> 2- <a
+                   href="https://en.wikipedia.org/wiki/The_Blacklist#Main_cast">Raymond
+                    Reddington</a><br> 3- <a
+                   href="https://imgflip.com/meme/294875301/Gentleman-frog"
+                   loading="lazy">Gentlemen Frog</a>
+            </p>
         </details>
         <details>
             <summary>2021</summary>
             <h3>Summary</h3>
             <p>The year 2021 has been eventful. A year of learning, travel and covid.</p>
-            <p>On technological front, I have been able to navigate the software architecture fundamentals, distributed
-                design fundamentals, amazon web services, go language and some .NET sprinkled. It is a great new
-                beginning. Finally I got the right inspiration to work on two of my favorite projects.</p>
-            <p>On a personal front, I went through two amazing trips through South India, got some new geek toys, and
-                got covid in the last week of the year.</p>
-            <p>I don't have many numbers this year, but have some learnings and photos from my trips.</p>
+            <p>On technological front, I have been able to navigate the software architecture
+                fundamentals, distributed design fundamentals, amazon web services, go language
+                and some .NET sprinkled. It is a great new beginning. Finally I got the right
+                inspiration to work on two of my favorite projects.</p>
+            <p>On a personal front, I went through two amazing trips through South India, got
+                some new geek toys, and got covid in the last week of the year.</p>
+            <p>I don't have many numbers this year, but have some learnings and photos from my
+                trips.</p>
             <h3>Learnings</h3>
             <p>Here are my most prized learnings (key concepts in bold)</p>
             <ol>
                 <li>
-                    <p>Embrace <strong>habits and discipline</strong> in place of motivation and productivity</p>
-                    <p>This is a self-realization that occurred several years ago and I tested it in my various
-                        short-term and long-term activities and plans. Finally, I am fully convinced of this. This ties
-                        into one of my other favorite approaches to life &mdash; Goals vs Systems.</p>
+                    <p>Embrace <strong>habits and discipline</strong> in place of motivation and
+                        productivity</p>
+                    <p>This is a self-realization that occurred several years ago and I tested
+                        it in my various short-term and long-term activities and plans. Finally,
+                        I am fully convinced of this. This ties into one of my other favorite
+                        approaches to life &mdash; Goals vs Systems.</p>
                 </li>
                 <li>
-                    <p>Streaks are good but <strong>spaced repetition</strong> learning is better.</p>
-                    <p>On learning platforms such as Pluralsight, you get badges for continuous learning. For example,
-                        the <em>Back to Back 5x</em> badge. This badge indicates that you have learned something each
-                        day for 5 days in a row. It makes you feel good. It is actually good when you want to skim
-                        something you already know or want a gain cursory knowledge on a topic. However, for deeper
-                        understanding and skill building, it is best for you to learn your topic with <a
-                            href="https://sive.rs/srs">spaced repetition</a>.</p>
+                    <p>Streaks are good but <strong>spaced repetition</strong> learning is
+                        better.</p>
+                    <p>On learning platforms such as Pluralsight, you get badges for continuous
+                        learning. For example, the <em>Back to Back 5x</em> badge. This badge
+                        indicates that you have learned something each day for 5 days in a row.
+                        It makes you feel good. It is actually good when you want to skim
+                        something you already know or want a gain cursory knowledge on a topic.
+                        However, for deeper understanding and skill building, it is best for you
+                        to learn your topic with <a href="https://sive.rs/srs">spaced
+                            repetition</a>.</p>
                     <p>To learn more about this technique, go through the <a
-                            href="https://www.coursera.org/learn/learning-how-to-learn/">Learning how to learn
-                            course</a> on Coursera.</p>
+                           href="https://www.coursera.org/learn/learning-how-to-learn/">Learning
+                            how to learn course</a> on Coursera.</p>
                 </li>
                 <li>
-                    <p><strong>Prepare for burnouts</strong> and avoid mini-heartaches and other mess</p>
-                    <p>I first learned of the word burnout when I worked in a startup. It took me about a decade to know
-                        that burnouts still occur despite knowing of them if they are not identified and managed
-                        earlier. Some tips include:</p>
+                    <p><strong>Prepare for burnouts</strong> and avoid mini-heartaches and other
+                        mess</p>
+                    <p>I first learned of the word burnout when I worked in a startup. It took
+                        me about a decade to know that burnouts still occur despite knowing of
+                        them if they are not identified and managed earlier. Some tips include:
+                    </p>
                     <ol>
-                        <li>Keep the work ticking and reduce unproductive days. This doesn't mean that you need to crank
-                            out code every single hour. Sometimes it helps to focus on those technical debt items that
-                            you have on the backlog. Sometimes you may want to work on infrastructure stuff.</li>
-                        <li>Plan for staggered flow moments. i.e. scheduled flow moments on your calendar. Google
-                            calendar and Microsoft Outlook now have ways to help you achieve this. Personally, instead
-                            of letting them control my time, I manually set these flow moments on a daily basis.</li>
-                        <li>Plan vacations way ahead of time. This is absolutely key. I suggest this to my team members
-                            always and forget to do it myself.</li>
-                        <li>Set boundaries. Talk to your lead or manager and let them know about your productive times,
-                            off-times. Avoid weekdays and overtimes as much as possible. Talking ahead of time about
-                            this will help you get into a good habit.</li>
+                        <li>Keep the work ticking and reduce unproductive days. This doesn't
+                            mean that you need to crank out code every single hour. Sometimes it
+                            helps to focus on those technical debt items that you have on the
+                            backlog. Sometimes you may want to work on infrastructure stuff.
+                        </li>
+                        <li>Plan for staggered flow moments. i.e. scheduled flow moments on your
+                            calendar. Google calendar and Microsoft Outlook now have ways to
+                            help you achieve this. Personally, instead of letting them control
+                            my time, I manually set these flow moments on a daily basis.</li>
+                        <li>Plan vacations way ahead of time. This is absolutely key. I suggest
+                            this to my team members always and forget to do it myself.</li>
+                        <li>Set boundaries. Talk to your lead or manager and let them know about
+                            your productive times, off-times. Avoid weekdays and overtimes as
+                            much as possible. Talking ahead of time about this will help you get
+                            into a good habit.</li>
                     </ol>
                 </li>
                 <li>
-                    <p>Minimal <strong>exercise and portion-controlled diet</strong> will save you</p>
+                    <p>Minimal <strong>exercise and portion-controlled diet</strong> will save
+                        you</p>
                     <ol>
-                        <li>Morning walk, brisk walk in your jail-sized room, some pushups and pullups, and may be some
-                            weightlifting.</li>
+                        <li>Morning walk, brisk walk in your jail-sized room, some pushups and
+                            pullups, and may be some weightlifting.</li>
                         <li>Eat in a smaller plate, one serving. James Clear has a <a
-                                href="https://jamesclear.com/feeling-fat">good thought process</a> on this.</li>
+                               href="https://jamesclear.com/feeling-fat">good thought
+                                process</a> on this.</li>
                     </ol>
                 </li>
                 <li>
                     <p>Be <strong>paranoid about hygiene</strong>, better safe than sorry.</p>
                     <ol>
-                        <li>Rethink your hygiene routine. There is always a room for improvement.</li>
-                        <li>In today's capitalistic and individualist societies, it is hard to convince everyone. Find
-                            better and effective ways to be hygienic, be it food or your ambient surroundings.</li>
-                        <li>Some people will always think you are an ass. It is okay. You cannot control their thoughts,
-                            only your actions</li>
+                        <li>Rethink your hygiene routine. There is always a room for
+                            improvement.</li>
+                        <li>In today's capitalistic and individualist societies, it is hard to
+                            convince everyone. Find better and effective ways to be hygienic, be
+                            it food or your ambient surroundings.</li>
+                        <li>Some people will always think you are an ass. It is okay. You cannot
+                            control their thoughts, only your actions</li>
                     </ol>
                 </li>
             </ol>
             <h3>Some photos</h3>
             <p>Here is a few photos I liked this year.</p>
-            <p><img src="https://i.imgur.com/YbR0CBx.jpg">
+            <p><img src="https://i.imgur.com/YbR0CBx.jpg" loading="lazy">
                 <em>A trip to remember. Coorg</em>
             </p>
-            <p><img src="https://i.imgur.com/JZV2vJ8.jpg">
+            <p><img src="https://i.imgur.com/JZV2vJ8.jpg" loading="lazy">
                 <em>One Coorg landscape</em>
             </p>
-            <p><img loading="lazy" src="https://i.imgur.com/Wop9lxT.jpg" width="300" height="300">
-                <img loading="lazy" src="https://i.imgur.com/1IGi5HV.jpg" width="300" height="300">
+            <p><img loading="lazy" src="https://i.imgur.com/Wop9lxT.jpg" width="300"
+                     height="300">
+                <img loading="lazy" src="https://i.imgur.com/1IGi5HV.jpg" width="300"
+                     height="300">
             </p>
             <p><em>Family. Pamban bridge, Rameshwaram</em></p>
             <h3>Misc</h3>
             <h3>Quotes</h3>
             <p>Some quotes, new and old, that I liked:</p>
             <blockquote>
-                <p>To accomplish great things, we must not only act, but also dream; not only plan, but also believe.
-                    &mdash; Anatole France</p>
-                <p>It's affinity and communication, and an empathy for the human condition, that binds us all, and keeps
-                    a soul in wonder.
-                    &mdash; Homeless guy on Loudermilk</p>
-                <p>We buy shit we don't need, with money we don't have, to impress people we don't like.
-                    &mdash; George Carlin</p>
-                <p>jisko saphalta nahi mili hai na usko bewakuf nahi samajhna (Translation: Do not consider the one who
-                    has not been successful a fool.)
-                    &mdash; <a href="https://www.youtube.com/watch?v=pUzkmhPs6zs&amp;t=1911s">Manoj Bajpayee's
-                        mother</a></p>
+                <p>To accomplish great things, we must not only act, but also dream; not only
+                    plan, but also believe. &mdash; Anatole France</p>
+                <p>It's affinity and communication, and an empathy for the human condition, that
+                    binds us all, and keeps a soul in wonder. &mdash; Homeless guy on Loudermilk
+                </p>
+                <p>We buy shit we don't need, with money we don't have, to impress people we
+                    don't like. &mdash; George Carlin</p>
+                <p>jisko saphalta nahi mili hai na usko bewakuf nahi samajhna (Translation: Do
+                    not consider the one who has not been successful a fool.) &mdash; <a
+                       href="https://www.youtube.com/watch?v=pUzkmhPs6zs&amp;t=1911s">Manoj
+                        Bajpayee's mother</a></p>
             </blockquote>
             <h3>Shows</h3>
             <p>New: Loudermilk, McMafia, ZeroZeroZero, Bosch, Eastbound and down, Psych</p>
@@ -276,17 +331,19 @@
         </details>
         <details>
             <summary>2020</summary>
-            <p>I write this note around the end of December. The process is simple. I fight a baggage of depression and
-                disappointments laced with chaotic thinking. This manifests into something I call a year-in-review. This
-                year did not end on time for me. It took three extra months for me to finally move forward.</p>
-            <p>In the beginning of March, we got wind of a single Covid-19 infection in a nearby IT park. Our team
-                decided to go back home for the week. In most of our minds, we already knew that this is going to be
-                semi long-term thing.</p>
-            <p>I was low-key ecstatic with the prospect of working from home. I realized around end of 2014 that my
-                productivity was much higher when working at home. That thought sat in my head. After a while, I noticed
-                some thought leaders pushing for remote work and the perils of open offices.</p>
-            <p>I have been reading a lot of opinions on developer culture and developer experience for a while now. Some
-                of them include:</p>
+            <p>I write this note around the end of December. The process is simple. I fight a
+                baggage of depression and disappointments laced with chaotic thinking. This
+                manifests into something I call a year-in-review. This year did not end on time
+                for me. It took three extra months for me to finally move forward.</p>
+            <p>In the beginning of March, we got wind of a single Covid-19 infection in a nearby
+                IT park. Our team decided to go back home for the week. In most of our minds, we
+                already knew that this is going to be semi long-term thing.</p>
+            <p>I was low-key ecstatic with the prospect of working from home. I realized around
+                end of 2014 that my productivity was much higher when working at home. That
+                thought sat in my head. After a while, I noticed some thought leaders pushing
+                for remote work and the perils of open offices.</p>
+            <p>I have been reading a lot of opinions on developer culture and developer
+                experience for a while now. Some of them include:</p>
             <ul>
                 <li>Negative costs of interrupting an engineer at work</li>
                 <li>Cost-benefits associated with remote work</li>
@@ -295,102 +352,123 @@
                 <li>10x engineer, 1x engineer</li>
                 <li>and so on.</li>
             </ul>
-            <p>With all this knowledge and bent of mind coupled, I believed and concluded that WFH, or remote work, is
-                what I need. So I was happy about coming back home.</p>
-            <p>Yet, I did not know what was in store. Nobody did. The term new normal spread like wildfire when it was
-                evident that there is no clear end in sight. This is no chaos. This is a cataclysm. An event that
-                forever changes all society.</p>
-            <p>I was ready for wearing a mask. I started using an anti-pollution mask during the daily commute in
-                November 2019. It worked wonders on my breathing and outlook for the day. So I was ready.</p>
-            <p>Split into three phases, this is how I went through the year &mdash; descent, despair and depression.</p>
+            <p>With all this knowledge and bent of mind coupled, I believed and concluded that
+                WFH, or remote work, is what I need. So I was happy about coming back home.</p>
+            <p>Yet, I did not know what was in store. Nobody did. The term new normal spread
+                like wildfire when it was evident that there is no clear end in sight. This is
+                no chaos. This is a cataclysm. An event that forever changes all society.</p>
+            <p>I was ready for wearing a mask. I started using an anti-pollution mask during the
+                daily commute in November 2019. It worked wonders on my breathing and outlook
+                for the day. So I was ready.</p>
+            <p>Split into three phases, this is how I went through the year &mdash; descent,
+                despair and depression.</p>
             <p><strong>Descent</strong></p>
-            <p>As a thinker and an introvert, it felt normal to work from home. Yes, I am an introvert. Lately, I am
-                rather proud about this fact.</p>
-            <p>I love solitude and quiet. I value a focus friendly ambience. This makes it difficult for me to work in
-                noisy workspaces, especially the ones with open plans.</p>
-            <p>Full of hope, I preached to close colleagues about the virtues of working from home. All I needed to do
-                was show up on time and follow some best practices to be productive while remote. All is good. Some
-                habits and lifestyle changes happened organically. Some good, some bad.</p>
+            <p>As a thinker and an introvert, it felt normal to work from home. Yes, I am an
+                introvert. Lately, I am rather proud about this fact.</p>
+            <p>I love solitude and quiet. I value a focus friendly ambience. This makes it
+                difficult for me to work in noisy workspaces, especially the ones with open
+                plans.</p>
+            <p>Full of hope, I preached to close colleagues about the virtues of working from
+                home. All I needed to do was show up on time and follow some best practices to
+                be productive while remote. All is good. Some habits and lifestyle changes
+                happened organically. Some good, some bad.</p>
             <ul>
-                <li>Eating less rice &mdash; This led losing nearly 5kgs within a month without much exercise and next
-                    to no outdoor activities. I lived only on oatmeal, millets, and curries and dal. To fend off hunger
-                    pangs in the gaps, I took to sweet and salty snacks.</li>
-                <li>Daily weight watching &mdash; Above diet constraint resulted in checking my weight multiple times a
-                    day. I kept a weight scale next to my desk for this.</li>
-                <li>Staggered work hours &mdash; Then, a pattern emerged gradually wherein I worked for 2 hours and then
-                    was off work for 1 hour, repeatedly, until the end of the day. This culminated into often working
-                    12-14 hours per day. I noticed my productivity tapering off as the worktime became more splattered
+                <li>Eating less rice &mdash; This led losing nearly 5kgs within a month without
+                    much exercise and next to no outdoor activities. I lived only on oatmeal,
+                    millets, and curries and dal. To fend off hunger pangs in the gaps, I took
+                    to sweet and salty snacks.</li>
+                <li>Daily weight watching &mdash; Above diet constraint resulted in checking my
+                    weight multiple times a day. I kept a weight scale next to my desk for this.
+                </li>
+                <li>Staggered work hours &mdash; Then, a pattern emerged gradually wherein I
+                    worked for 2 hours and then was off work for 1 hour, repeatedly, until the
+                    end of the day. This culminated into often working 12-14 hours per day. I
+                    noticed my productivity tapering off as the worktime became more splattered
                     across the day for several weeks.</li>
-                <li>Dark mode &mdash; As I worked at night more often, I embraced dark mode wherever possible. Visual
-                    Studio sucked in dark mode.</li>
-                <li>Bad sleep &mdash; I got things done late at night, not to catchup on tomorrows work, but to finish
-                    the high-profile tasks of the day. This devolved into playing catching up most of the week. This was
-                    troublesome as some nights, I was just tired to do any mental work. I got less and less sleep around
-                    June.</li>
-                <li>Polyphasic sleep &mdash; I looked for opportunities for sleeping during the day, 20 minutes at a
-                    time. It was good for a few days. Then those 20 minutes swiftly turned into 3 hours.</li>
-                <li>Binge watching TV shows &mdash; Just one show, The Office. I watched it entire 9 seasons 5 times in
-                    a row.</li>
+                <li>Dark mode &mdash; As I worked at night more often, I embraced dark mode
+                    wherever possible. Visual Studio sucked in dark mode.</li>
+                <li>Bad sleep &mdash; I got things done late at night, not to catchup on
+                    tomorrows work, but to finish the high-profile tasks of the day. This
+                    devolved into playing catching up most of the week. This was troublesome as
+                    some nights, I was just tired to do any mental work. I got less and less
+                    sleep around June.</li>
+                <li>Polyphasic sleep &mdash; I looked for opportunities for sleeping during the
+                    day, 20 minutes at a time. It was good for a few days. Then those 20 minutes
+                    swiftly turned into 3 hours.</li>
+                <li>Binge watching TV shows &mdash; Just one show, The Office. I watched it
+                    entire 9 seasons 5 times in a row.</li>
             </ul>
-            <p>This turned into a bad burnout and lasted about a month. I figured I will take a break, work in a senior
-                developer role, get my focus back etc.</p>
+            <p>This turned into a bad burnout and lasted about a month. I figured I will take a
+                break, work in a senior developer role, get my focus back etc.</p>
             <p><strong>Despair</strong></p>
-            <p>I did not get that break. I am choosy about the work I intend to do, but I had to relent and begin
-                another assignment.</p>
-            <p>This assignment was a golden opportunity to understand enterprise architecture in a great team. But, my
-                mindset was not receptive. I was looking to cruise, but the work kept piling up. Not a stranger to this
-                situation, but in such cases, I usually plan some power-through sessions to get on top of the work. This
-                was different.</p>
-            <p>I became ever so argumentative, restless and impatient. The work suffered. I kept having the same
-                discussion, reading through the same codebase on a loop, kept asking the same questions. These
-                situations devolved into having fights with the manager. This frustrated me daily. There was some fault
-                on the other side as well. But, that's not what is important. I hated every moment in that assignment as
-                my behaviour caused some collateral damage to the team.</p>
-            <p>One of my much younger colleagues, was very kind, despite repetitive questions and discussions. His
-                positivity and general demeanor helped me regain some levelheadedness. Thanks Jatin.</p>
-            <p>I watched The Office 4 more times in this phase, bringing the total to 15 times. I moved onto a new
-                assignment after a very short break. I got hit with many health issues somewhere in phase two. I
-                addressed these with doctor visits immediately during this break.</p>
+            <p>I did not get that break. I am choosy about the work I intend to do, but I had to
+                relent and begin another assignment.</p>
+            <p>This assignment was a golden opportunity to understand enterprise architecture in
+                a great team. But, my mindset was not receptive. I was looking to cruise, but
+                the work kept piling up. Not a stranger to this situation, but in such cases, I
+                usually plan some power-through sessions to get on top of the work. This was
+                different.</p>
+            <p>I became ever so argumentative, restless and impatient. The work suffered. I kept
+                having the same discussion, reading through the same codebase on a loop, kept
+                asking the same questions. These situations devolved into having fights with the
+                manager. This frustrated me daily. There was some fault on the other side as
+                well. But, that's not what is important. I hated every moment in that assignment
+                as my behaviour caused some collateral damage to the team.</p>
+            <p>One of my much younger colleagues, was very kind, despite repetitive questions
+                and discussions. His positivity and general demeanor helped me regain some
+                levelheadedness. Thanks Jatin.</p>
+            <p>I watched The Office 4 more times in this phase, bringing the total to 15 times.
+                I moved onto a new assignment after a very short break. I got hit with many
+                health issues somewhere in phase two. I addressed these with doctor visits
+                immediately during this break.</p>
             <p><strong>Depression</strong></p>
-            <p>Depression is not generally a phase for me. It is a state of mind for a good part of the last 2 decades.
-                But this time, it became a separate phase. My behavior just threw me into deeper depths than I have seen
-                before. At that point, I did a deeper dive into self to gain more perspective and see newer avenues for
-                a cure.</p>
-            <p>After the initial onset of the vicious cycle of self-loathing and anger, I came to my senses about a
-                plenty of things that left me in a persistent depressed state in the first place.</p>
-            <p>I evaluated and reevaluated many significant actions and decisions going back 15+ years. I pinpointed my
-                failures to a personal attribute and searched for ways to either overcome or step around that attribute.
-                I incorporated more gratitude, lesser ego and big-picture thinking.</p>
-            <p>One of other significant things I have done after a long time is to rethink my purpose. This helped
-                evaluate my current and past relationships and laid a path forward.</p>
-            <p>The bright side was that all of this did not feel new or scary. I still have my tools to fight and
-                embrace it. It took me some time-off and good discussions with my parents and mentors who helped me see
-                the light. Thank you to my parents and my managers.</p>
-            <p>In this new assignment, I also learned a bunch of new things. This cured me somewhat of the recent mental
-                state. I have also managed to complete a major course work at my workplace. It was significant and has
-                enabled me to identify my career path.</p>
+            <p>Depression is not generally a phase for me. It is a state of mind for a good part
+                of the last 2 decades. But this time, it became a separate phase. My behavior
+                just threw me into deeper depths than I have seen before. At that point, I did a
+                deeper dive into self to gain more perspective and see newer avenues for a cure.
+            </p>
+            <p>After the initial onset of the vicious cycle of self-loathing and anger, I came
+                to my senses about a plenty of things that left me in a persistent depressed
+                state in the first place.</p>
+            <p>I evaluated and reevaluated many significant actions and decisions going back 15+
+                years. I pinpointed my failures to a personal attribute and searched for ways to
+                either overcome or step around that attribute. I incorporated more gratitude,
+                lesser ego and big-picture thinking.</p>
+            <p>One of other significant things I have done after a long time is to rethink my
+                purpose. This helped evaluate my current and past relationships and laid a path
+                forward.</p>
+            <p>The bright side was that all of this did not feel new or scary. I still have my
+                tools to fight and embrace it. It took me some time-off and good discussions
+                with my parents and mentors who helped me see the light. Thank you to my parents
+                and my managers.</p>
+            <p>In this new assignment, I also learned a bunch of new things. This cured me
+                somewhat of the recent mental state. I have also managed to complete a major
+                course work at my workplace. It was significant and has enabled me to identify
+                my career path.</p>
             <h3>Realizations</h3>
             <p>Some new realizations I happened upon:</p>
             <ol>
                 <li>Drastic cutdown of carbs affected my energy levels</li>
                 <li>Dark mode is not effective if you are working more than 8 hours a day</li>
-                <li>Polyphasic sleep may not be effective without a solid 5+ hours sleep the night before</li>
+                <li>Polyphasic sleep may not be effective without a solid 5+ hours sleep the
+                    night before</li>
                 <li>I love data visualization.</li>
                 <li>The senior engineer in me became rusty.</li>
-                <li>Usual opinions on The Office stop making sense after you have watched it enough times. For example:
-                    Karen was not right for Jim. David Wallace was not as good a boss as we tend to think.</li>
-                <li>Sometimes you don't have to work on good projects. They are still good projects without you. You
-                    just may not fit some projects.</li>
+                <li>Usual opinions on The Office stop making sense after you have watched it
+                    enough times. For example: Karen was not right for Jim. David Wallace was
+                    not as good a boss as we tend to think.</li>
+                <li>Sometimes you don't have to work on good projects. They are still good
+                    projects without you. You just may not fit some projects.</li>
                 <li>Key and Peele may break your addiction to The Office.</li>
-                <li>For the first time, I started saying it is okay when I mess up the smallest thing, professional or
-                    personal, instead of self-flagellation.</li>
-                <li>Remote work is still good, but now, I can see the other side of it. For remote work to be moderately
-                    successful, you need at least two things. <ol>
+                <li>For the first time, I started saying it is okay when I mess up the smallest
+                    thing, professional or personal, instead of self-flagellation.</li>
+                <li>Remote work is still good, but now, I can see the other side of it. For
+                    remote work to be moderately successful, you need at least two things. <ol>
                         <li>a team that is aligned with asynchronous communication patterns</li>
                         <li>good remote work <a
-                                href="https://in.pcmag.com/speech-recognition/84009/20-tips-for-working-from-home">patterns</a>
+                               href="https://in.pcmag.com/speech-recognition/84009/20-tips-for-working-from-home">patterns</a>
                             and <a
-                                href="https://www.inc.com/justin-bariso/googles-remote-work-policy-has-9-great-tips-you-should-definitely-steal-today.html">practices</a>.
+                               href="https://www.inc.com/justin-bariso/googles-remote-work-policy-has-9-great-tips-you-should-definitely-steal-today.html">practices</a>.
                         </li>
                     </ol>
                 </li>
@@ -413,12 +491,14 @@
                 <li>Completed Solution Architecture course work&dagger;</li>
             </ol>
             <blockquote>
-                <p>&dagger; These tasks were completed in March 2021. That means 2020 had 15 months for me.</p>
+                <p>&dagger; These tasks were completed in March 2021. That means 2020 had 15
+                    months for me.</p>
             </blockquote>
         </details>
         <details>
             <summary>2019</summary>
-            <p><img src="https://imgur.com/INTkdWi.png" alt="tirumala trip 2019 - animesh" />
+            <p><img src="https://imgur.com/INTkdWi.png" loading="lazy"
+                     alt="tirumala trip 2019 - animesh" />
                 <em>Tirumala trip in December 2019. Pic by Pradeep.</em>
             </p>
             <p>For me, this year is special in some ways. It is a year of</p>
@@ -429,14 +509,17 @@
             </ol>
             <h3>Some numbers</h3>
             <ol>
-                <li>365 commits on 9 personal projects. 90% of commits were done on the blog project.</li>
+                <li>365 commits on 9 personal projects. 90% of commits were done on the blog
+                    project.</li>
                 <li>4 books read, none fully</li>
-                <li>196 food orders on Swiggy. 3070₹ in December alone on 23 orders. For full update on this colossal
-                    waste, check back in a week or two. </li>
-                <li>1 Trip to Tirumala. Went to see Lord Venkateswara with my colleagues. We climbed the 3550 steps in
-                    the Alipiri route in about 4 hours. It was a memorable trip.</li>
+                <li>196 food orders on Swiggy. 3070₹ in December alone on 23 orders. For full
+                    update on this colossal waste, check back in a week or two. </li>
+                <li>1 Trip to Tirumala. Went to see Lord Venkateswara with my colleagues. We
+                    climbed the 3550 steps in the Alipiri route in about 4 hours. It was a
+                    memorable trip.</li>
             </ol>
-            <p><img src="https://imgur.com/GsCNkNF.png" alt="tirumala trip 2019 - animesh" />
+            <p><img src="https://imgur.com/GsCNkNF.png" loading="lazy"
+                     alt="tirumala trip 2019 - animesh" />
                 <em>me with srikanth, vijay, and pradeep (l -&gt; r)</em>
             </p>
         </details>
@@ -444,12 +527,14 @@
             <summary>2018</summary>
             <h3>Self</h3>
             <p>Introspection has become one of my guiding processes this year.</p>
-            <p>A few years back, I was visiting a friend after a long time. He asked me if I wanted to drive his car. I
-                said okay. As I was nearing the driver side, he asked "Are you still angry?"</p>
-            <p>It was a question from the <abbr title="out of the blue">left field</abbr>. "What do you mean?", I
-                replied. Though I knew what he meant, I couldn't process the fact that someone asked me that question.
-                Nobody has ever asked me that. Even I have never thought to ask myself this. It triggered many questions
-                within me.</p>
+            <p>A few years back, I was visiting a friend after a long time. He asked me if I
+                wanted to drive his car. I said okay. As I was nearing the driver side, he asked
+                "Are you still angry?"</p>
+            <p>It was a question from the <abbr title="out of the blue">left field</abbr>. "What
+                do you mean?", I replied. Though I knew what he meant, I couldn't process the
+                fact that someone asked me that question. Nobody has ever asked me that. Even I
+                have never thought to ask myself this. It triggered many questions within me.
+            </p>
             <p><em>Why did he ask me this?</em><br>
                 <em>How did he know this about me?</em><br>
                 <em>How did he think to ask this?</em><br>
@@ -460,89 +545,103 @@
             <p><em>Why am I still angry?</em><br>
                 <em>Why am I angry at all?</em>
             </p>
-            <p>This line of thinking stuck with me for a while and kicked off my journey into self. Rather than hating
-                myself or my circumstances, I started learning more about myself. I started to see the silver lining in
-                my failures. I realized my failure was a perceived failure. It was as if a cloud cover was coming off to
+            <p>This line of thinking stuck with me for a while and kicked off my journey into
+                self. Rather than hating myself or my circumstances, I started learning more
+                about myself. I started to see the silver lining in my failures. I realized my
+                failure was a perceived failure. It was as if a cloud cover was coming off to
                 reveal a beautiful day.</p>
-            <p>Yet, I lived with anger for a good while after that. The reason was that while I could understand my
-                anger, I had no control over my it. I didn't know what my triggers were. I hurt quite a few loved ones
-                even years after my first realization. I could justify some of my outbursts, but I did not realize the
+            <p>Yet, I lived with anger for a good while after that. The reason was that while I
+                could understand my anger, I had no control over my it. I didn't know what my
+                triggers were. I hurt quite a few loved ones even years after my first
+                realization. I could justify some of my outbursts, but I did not realize the
                 emotional impact on others and myself.</p>
-            <p>There was one incident where I wasn't able to respond to a team member despite empathizing with them. For
-                some reason, my heartbeat raised a bit when I was about to react to their request. After a few times of
-                this happening one thing became clear. The trigger was my expectation of how the collaboration should be
+            <p>There was one incident where I wasn't able to respond to a team member despite
+                empathizing with them. For some reason, my heartbeat raised a bit when I was
+                about to react to their request. After a few times of this happening one thing
+                became clear. The trigger was my expectation of how the collaboration should be
                 and not the team member.</p>
-            <p>I anticipated the next interaction. I slowed down my breathing and responded with facts and did not let
-                my "expectations" hold sway over me. After the interaction, I remember being in good spirits for the
-                rest of the day.</p>
-            <p>This incident afforded me the knowledge that it is possible, with some hard work, to be a calmer person.
-                I recollected the above conversation with my friend. I could see that I needed to work on my anger.</p>
-            <p>Soon, it dawned upon me that it is hard. How could I show a calmer demeanor in a stressful and emotional
-                situation? How could one behave the opposite of what they are feeling?</p>
-            <p>I realized meditation, mindfulness, stoicism and zen habits may help. Since I have already some
-                experience with it, I decided to apply mindfulness. My rudimentary understanding of this technique, so
-                far, is to</p>
+            <p>I anticipated the next interaction. I slowed down my breathing and responded with
+                facts and did not let my "expectations" hold sway over me. After the
+                interaction, I remember being in good spirits for the rest of the day.</p>
+            <p>This incident afforded me the knowledge that it is possible, with some hard work,
+                to be a calmer person. I recollected the above conversation with my friend. I
+                could see that I needed to work on my anger.</p>
+            <p>Soon, it dawned upon me that it is hard. How could I show a calmer demeanor in a
+                stressful and emotional situation? How could one behave the opposite of what
+                they are feeling?</p>
+            <p>I realized meditation, mindfulness, stoicism and zen habits may help. Since I
+                have already some experience with it, I decided to apply mindfulness. My
+                rudimentary understanding of this technique, so far, is to</p>
             <ul>
                 <li>slow down your perception</li>
                 <li>understand what is being consumed by your relevant senses</li>
                 <li>analyze how you are now feeling and how you are about to react </li>
                 <li>then respond rather than react if in an interaction with other person</li>
             </ul>
-            <p>Responding means to actually respond to the other person in a calmer and a collected manner. Use only
-                facts and not opinions. It is as if you would reply when completely sane. Think of being in a job
-                interview or in a live TV show.</p>
+            <p>Responding means to actually respond to the other person in a calmer and a
+                collected manner. Use only facts and not opinions. It is as if you would reply
+                when completely sane. Think of being in a job interview or in a live TV show.
+            </p>
             <p>Thank you <em>Swapnil</em> for asking me that question. It changed my life.</p>
             <h3>Productivity</h3>
-            <p>I removed my Netflix subscription after catching up with all the major series. As expected, this has
-                resulted in a significant increase of personal time.</p>
-            <p>I use Sync for Reddit and removed all the subreddit subscriptions including /r/all and /r/popular. I have
-                yet to find a way to do something similar for HN.</p>
+            <p>I removed my Netflix subscription after catching up with all the major series. As
+                expected, this has resulted in a significant increase of personal time.</p>
+            <p>I use Sync for Reddit and removed all the subreddit subscriptions including
+                /r/all and /r/popular. I have yet to find a way to do something similar for HN.
+            </p>
             <p>Lesson learned &mdash; Making good habits beats seeking productivity.</p>
             <h3>Work</h3>
             <p>I started <a href="/how-i-settled-on-react/">learning</a> react.js.</p>
-            <p>A few years back I made a few attempts both with .NET Core 1.0 and .NET Core 1.1, but stopped after the
-                things were moving faster than I could keep up with. First the CLI tools switch from <code>dnx</code>
-                and <code>dnvm</code> to <code>dotnet</code> and then the project file format switch from
-                <code>.json</code> back to <code>.csproj</code>. After .NET Core 2x become relatively stable, I have
-                resumed my explorations and adventures with .NET Core and all surrounding technologies to build awesome
-                applications on Linux. These would be mostly web applications.
-            </p>
-            <p>I happened upon an opportunity to prepare for a super technical whiteboard interview. I failed it, but it
-                was one of the most exciting moments this year. This experience helped me understand where I stood
-                w.r.t. algorithms, data structures and problem solving. I took to these websites like leetcode and
+            <p>A few years back I made a few attempts both with .NET Core 1.0 and .NET Core 1.1,
+                but stopped after the things were moving faster than I could keep up with. First
+                the CLI tools switch from <code>dnx</code> and <code>dnvm</code> to
+                <code>dotnet</code> and then the project file format switch from
+                <code>.json</code> back to <code>.csproj</code>. After .NET Core 2x become
+                relatively stable, I have resumed my explorations and adventures with .NET Core
+                and all surrounding technologies to build awesome applications on Linux. These
+                would be mostly web applications. </p>
+            <p>I happened upon an opportunity to prepare for a super technical whiteboard
+                interview. I failed it, but it was one of the most exciting moments this year.
+                This experience helped me understand where I stood w.r.t. algorithms, data
+                structures and problem solving. I took to these websites like leetcode and
                 codewars to try and solve a few problems.</p>
-            <p>I couldn't continue my work after a while on the freelance side project I took up last year. It was a
-                heartbreaking decision to stop working on it. Lesson learned &mdash; Be <em>more</em> ready for such
-                work.</p>
+            <p>I couldn't continue my work after a while on the freelance side project I took up
+                last year. It was a heartbreaking decision to stop working on it. Lesson learned
+                &mdash; Be <em>more</em> ready for such work.</p>
             <p>Bye 2018. Hello 2019.</p>
         </details>
         <details>
             <summary>2017</summary>
-            <p>Until the end of November, I was brimming with words about all my experiences this year and could not
-                wait to write this post. As the month of December rolled by with its holiday charms and end of the year
-                reprieve, I found it to difficult to articulate, even internally, all of those words and thoughts. So I
-                began writing this piece a little ahead to compose my thoughts and self.</p>
+            <p>Until the end of November, I was brimming with words about all my experiences
+                this year and could not wait to write this post. As the month of December rolled
+                by with its holiday charms and end of the year reprieve, I found it to difficult
+                to articulate, even internally, all of those words and thoughts. So I began
+                writing this piece a little ahead to compose my thoughts and self.</p>
             <h3>Break</h3>
-            <p>Life took quite the turn this year after I had decided to take a brief break from my career and stay at
-                home to spend time with my son.</p>
-            <p>For the first few weeks, it felt like a really bad move. I could feel the walls closing in around me. My
-                mind was attuned to being in a day job regardless of the productivity. The withdrawal period felt quite
-                intense. I could see a few familiar dark places again and was well on my way into stepping into them.
-                Familiarity with the situation helped me look for an out, several of which I have learned to seek for in
-                moments such as this.</p>
-            <p>After stumbling for a while, I found my rhythm. What helped me most in taking care of activities is to
-                break down each activity into a series of steps, kind of like an algorithm, and then optimize for
-                efficiency each time something hit me. There were a number of situations where I lost my cool and calm,
-                but having an understanding spouse made those times better. It took me from thinking "Oh no!" over and
-                over again to searching for possible bright sides to attaining peace and calm.</p>
-            <p>It was a slow realization that my situation was incredible. It made me realize that even when I am in a
-                bind, I could eke out a bit of a productive time on a regular basis and slowly build a habit out of it.
-            </p>
-            <p>This experience taught me that it is important to acknowledge family time as it comes and let everything
-                else become a second priority. It has also helped me realized all the things I was missing in life.</p>
+            <p>Life took quite the turn this year after I had decided to take a brief break from
+                my career and stay at home to spend time with my son.</p>
+            <p>For the first few weeks, it felt like a really bad move. I could feel the walls
+                closing in around me. My mind was attuned to being in a day job regardless of
+                the productivity. The withdrawal period felt quite intense. I could see a few
+                familiar dark places again and was well on my way into stepping into them.
+                Familiarity with the situation helped me look for an out, several of which I
+                have learned to seek for in moments such as this.</p>
+            <p>After stumbling for a while, I found my rhythm. What helped me most in taking
+                care of activities is to break down each activity into a series of steps, kind
+                of like an algorithm, and then optimize for efficiency each time something hit
+                me. There were a number of situations where I lost my cool and calm, but having
+                an understanding spouse made those times better. It took me from thinking "Oh
+                no!" over and over again to searching for possible bright sides to attaining
+                peace and calm.</p>
+            <p>It was a slow realization that my situation was incredible. It made me realize
+                that even when I am in a bind, I could eke out a bit of a productive time on a
+                regular basis and slowly build a habit out of it. </p>
+            <p>This experience taught me that it is important to acknowledge family time as it
+                comes and let everything else become a second priority. It has also helped me
+                realized all the things I was missing in life.</p>
             <h3>Netflix</h3>
-            <p>Having a lot of time on my hands this year, I turned to Netflix. I caught up with a lot of shows I was
-                meaning to watch for a long time.</p>
+            <p>Having a lot of time on my hands this year, I turned to Netflix. I caught up with
+                a lot of shows I was meaning to watch for a long time.</p>
             <p>I binged the following shows in about two months.</p>
             <ul>
                 <li>The Office (US)</li>
@@ -568,19 +667,22 @@
                 <li>Mad Men</li>
                 <li>The Wire</li>
             </ul>
-            <p>After being out of the loop about so many jokes and quotes, I could finally retroactively understand tons
-                of Reddit comments after completing The Office and Arrested Development. That was a weird high.</p>
-            <p>Eagerly awaiting new seasons on Better Call Saul, Black Mirror and Ozark, and a few other shows.</p>
+            <p>After being out of the loop about so many jokes and quotes, I could finally
+                retroactively understand tons of Reddit comments after completing The Office and
+                Arrested Development. That was a weird high.</p>
+            <p>Eagerly awaiting new seasons on Better Call Saul, Black Mirror and Ozark, and a
+                few other shows.</p>
             <h3>Django</h3>
-            <p>Earlier this year, I started learning Django to build an application for a friend. I followed the
-                official tutorial and few other guides to get started. I am loving every minute of learning Django.
-                Coming from an ASP.NET MVC background, it felt refreshing. In the coming days, I hope I could write a
-                bit about the things I learned.</p>
+            <p>Earlier this year, I started learning Django to build an application for a
+                friend. I followed the official tutorial and few other guides to get started. I
+                am loving every minute of learning Django. Coming from an ASP.NET MVC
+                background, it felt refreshing. In the coming days, I hope I could write a bit
+                about the things I learned.</p>
             <h3>2018</h3>
             <p>I have no clue what I would do. Let's wait and see.</p>
-            <p>Since 2016, I started writing down a list of things I have done in the current year rather than setting
-                up new goals and resolutions for the upcoming year. Keeping up with that tradition, here is a short
-                summary of this year.</p>
+            <p>Since 2016, I started writing down a list of things I have done in the current
+                year rather than setting up new goals and resolutions for the upcoming year.
+                Keeping up with that tradition, here is a short summary of this year.</p>
             <ul>
                 <li>Became a stay-at-home dad</li>
                 <li>Learned Django and kept working on an application</li>
@@ -592,167 +694,188 @@
         </details>
         <details>
             <summary>2016</summary>
-            <p>I have learned from my efforts in years 2012 and 2013 that creating fresh new year resolutions don't
-                often work for various reasons. Not for everybody at the least.</p>
-            <p>It is then that I have decided that I would write about what I have achieved in that year rather than
-                what I would like to achieve in the next year. Last year has been a good year for me in that regard. I
-                did not have any specific plan coming into 2016.</p>
+            <p>I have learned from my efforts in years 2012 and 2013 that creating fresh new
+                year resolutions don't often work for various reasons. Not for everybody at the
+                least.</p>
+            <p>It is then that I have decided that I would write about what I have achieved in
+                that year rather than what I would like to achieve in the next year. Last year
+                has been a good year for me in that regard. I did not have any specific plan
+                coming into 2016.</p>
             <h3>D3</h3>
-            <p>I had a great opportunity at work to learn <a href="https://d3js.org/">d3.js</a>, a JavaScript library
-                for creating web-based interactive charts and visualizations. This is a library that lets you build any
-                kind of visualization from scratch. This means it would give you control of all aspects of your
-                visualization. This is what it makes it so powerful, but it means that initially it would take a good
-                amount of time for the implementation. Thankfully, I was given ample time to learn the basics of d3.</p>
-            <p>Anecdotally, it took me about two weeks to implement a multi line chart and two more weeks to understand
-                what each line of code was meant for. It would take, at best, an hour or two to get this kind of a chart
-                up and running with <a href="https://www.highcharts.com/">HighCharts</a>, another popular JavaScript
+            <p>I had a great opportunity at work to learn <a href="https://d3js.org/">d3.js</a>,
+                a JavaScript library for creating web-based interactive charts and
+                visualizations. This is a library that lets you build any kind of visualization
+                from scratch. This means it would give you control of all aspects of your
+                visualization. This is what it makes it so powerful, but it means that initially
+                it would take a good amount of time for the implementation. Thankfully, I was
+                given ample time to learn the basics of d3.</p>
+            <p>Anecdotally, it took me about two weeks to implement a multi line chart and two
+                more weeks to understand what each line of code was meant for. It would take, at
+                best, an hour or two to get this kind of a chart up and running with <a
+                   href="https://www.highcharts.com/">HighCharts</a>, another popular JavaScript
                 library for creating interactive charts and visualizations.</p>
-            <p>Then I was tasked to create a custom chart which somewhat resembled a box plot, but with a lot of
-                interactivity based on user inputs on other parts of the page. The first prototype of this chart took me
-                about three days to create. It was one of the best moments of 2016. Once the prototype was nailed down,
-                for the management and synchronization of data from various sources, I used AngularJs (1x).</p>
-            <p>This kind of a high is <em>the</em> best thing about programming and I am glad I got introduced to d3 to
-                rediscover it, thanks to my awesome customer at the time.</p>
-            <p>Learning d3 also helped me understand what SVG is and why it is so awesome. This has also forced me to
-                look deep into Javascript and made me fell in love with the language all over again.</p>
+            <p>Then I was tasked to create a custom chart which somewhat resembled a box plot,
+                but with a lot of interactivity based on user inputs on other parts of the page.
+                The first prototype of this chart took me about three days to create. It was one
+                of the best moments of 2016. Once the prototype was nailed down, for the
+                management and synchronization of data from various sources, I used AngularJs
+                (1x).</p>
+            <p>This kind of a high is <em>the</em> best thing about programming and I am glad I
+                got introduced to d3 to rediscover it, thanks to my awesome customer at the
+                time.</p>
+            <p>Learning d3 also helped me understand what SVG is and why it is so awesome. This
+                has also forced me to look deep into Javascript and made me fell in love with
+                the language all over again.</p>
             <h3>New blog</h3>
-            <p>Though node.js based static generators are all the rage, I chose to a go a different route. Another
-                programming language I use and love is Python. What better an opportunity to use and customize a tool
-                written using that language? So I have evaluated Python based static generators and chose <a
-                    href="https://www.getlektor.com/">Lektor</a>.</p>
-            <p>I have gained basic understanding about building responsive interfaces. I have discovered <a
-                    href="https://milligram.github.io/">milligram.css</a> in the process.</p>
-            <p>As outlined in my first <a href="/hello-lektor/">post</a> on this blog, I started updating this blog with
-                a few of the desired features.</p>
+            <p>Though node.js based static generators are all the rage, I chose to a go a
+                different route. Another programming language I use and love is Python. What
+                better an opportunity to use and customize a tool written using that language?
+                So I have evaluated Python based static generators and chose <a
+                   href="https://www.getlektor.com/">Lektor</a>.</p>
+            <p>I have gained basic understanding about building responsive interfaces. I have
+                discovered <a href="https://milligram.github.io/">milligram.css</a> in the
+                process.</p>
+            <p>As outlined in my first <a href="/hello-lektor/">post</a> on this blog, I started
+                updating this blog with a few of the desired features.</p>
             <h3>2017 and ahead</h3>
-            <p>The biggest change I will be making is that I will be taking a short career break to spend more time with
-                my family.</p>
-            <p>Apart from that, I have a tons of items in my <a href="/tackling-distractions/">distraction log</a>
-                accumulated from the last couple of years.</p>
-            <p>Leaflet, React, Aurelia, Gulp, Webpack, Node, WebGL, Typescript, Xamarin, UWP, Android, Pyramid, Phoenix,
-                .NET Core, Vibe.d, C++, Ruby, ES6, Tableau, BI+DWH, ML, Tensorflow, Data Science, Raspberry Pi.</p>
-            <p>Despite the huge list, I know I will be focused on a few things at the most and that time will be
-                utilized more toward building something useful rather than learning how to do specific things in a
-                particular technology.</p>
+            <p>The biggest change I will be making is that I will be taking a short career break
+                to spend more time with my family.</p>
+            <p>Apart from that, I have a tons of items in my <a
+                   href="/tackling-distractions/">distraction log</a> accumulated from the last
+                couple of years.</p>
+            <p>Leaflet, React, Aurelia, Gulp, Webpack, Node, WebGL, Typescript, Xamarin, UWP,
+                Android, Pyramid, Phoenix, .NET Core, Vibe.d, C++, Ruby, ES6, Tableau, BI+DWH,
+                ML, Tensorflow, Data Science, Raspberry Pi.</p>
+            <p>Despite the huge list, I know I will be focused on a few things at the most and
+                that time will be utilized more toward building something useful rather than
+                learning how to do specific things in a particular technology.</p>
             <p>Goodbye 2016. Hello 2017!</p>
         </details>
         <details>
             <summary>2012</summary>
-            <p>2012 was the year I wished things would just work. That line of thinking, for a lack of better word,
-                was escapist.</p>
-            <p>I have to make it work for things to just work and fall into place. I did not persist when it felt
-                tiresome. I took necessary breaks without resuming back to whatever I was supposed to be doing. I
-                gave up a lot many times than I should.</p>
-            <p>At the start of the year, I created a schedule to follow in the hope of becoming a better person. I
-                hoped to blog four times a month, workout every Sunday, go out for a photowalk each Saturday and
-                continue practicing programming stuff. I failed to follow the schedule on all the activities except
-                the programming practice.</p>
-            <p>My first open source project attempt fizzled after couple of months, my physical fitness hit an all
-                time low, I felt a stranger to my own camera, and never had a wholesome moment in terms of happiness
-                or work satisfaction.</p>
-            <p>On a more personal front, there were both things which I wished should happen and things I never
-                thought would happen. I never seemed to have a grip on most of the personal moments that really
-                mattered.</p>
-            <p>It was as if some part of me consciously sought failure constantly. A part of me which did not root
-                for the home team. It almost feels like I had a predisposition for attracting negativity. A part
-                which hated the pain of discipline and hardwork. To think that I even allowed that feeling to exist
+            <p>2012 was the year I wished things would just work. That line of thinking, for a
+                lack of better word, was escapist.</p>
+            <p>I have to make it work for things to just work and fall into place. I did not
+                persist when it felt tiresome. I took necessary breaks without resuming back to
+                whatever I was supposed to be doing. I gave up a lot many times than I should.
+            </p>
+            <p>At the start of the year, I created a schedule to follow in the hope of becoming
+                a better person. I hoped to blog four times a month, workout every Sunday, go
+                out for a photowalk each Saturday and continue practicing programming stuff. I
+                failed to follow the schedule on all the activities except the programming
+                practice.</p>
+            <p>My first open source project attempt fizzled after couple of months, my physical
+                fitness hit an all time low, I felt a stranger to my own camera, and never had a
+                wholesome moment in terms of happiness or work satisfaction.</p>
+            <p>On a more personal front, there were both things which I wished should happen and
+                things I never thought would happen. I never seemed to have a grip on most of
+                the personal moments that really mattered.</p>
+            <p>It was as if some part of me consciously sought failure constantly. A part of me
+                which did not root for the home team. It almost feels like I had a
+                predisposition for attracting negativity. A part which hated the pain of
+                discipline and hardwork. To think that I even allowed that feeling to exist
                 within me is disappointing.</p>
-            <p>But, not everything was bad though. There were some valuable lessons learned and hard hitting
-                realizations.</p>
+            <p>But, not everything was bad though. There were some valuable lessons learned and
+                hard hitting realizations.</p>
             <p>I learned that:</p>
             <ul>
-                <li>it is perfectly okay to chase my dream even if I am not in my prime and that the important thing
-                    is to have tried and continue to work toward it.</li>
-                <li>it is perfectly okay even if it meant that I end up a shitty writer, blogger or a programmer.
-                </li>
-                <li>it is perfectly okay to work in sub optimal conditions when trying to prove a point to self.
-                </li>
+                <li>it is perfectly okay to chase my dream even if I am not in my prime and that
+                    the important thing is to have tried and continue to work toward it.</li>
+                <li>it is perfectly okay even if it meant that I end up a shitty writer, blogger
+                    or a programmer. </li>
+                <li>it is perfectly okay to work in sub optimal conditions when trying to prove
+                    a point to self. </li>
                 <li>it is perfectly okay if I never venture into film-making.</li>
                 <li>it is perfectly okay to separate passion from work.</li>
             </ul>
-            <p>The major thing I did in 2012 was to go back to a programming career. I did this for myself even if
-                it meant that I would end up with lesser pay. Though I always hated the buzzword oriented
-                programming projects coupled with bureaucracy, I have driven myself constantly toward getting
-                accustomed to it in an effort to both stay employed as well as continue to work toward being a
-                "programmer".</p>
-            <p>There were plenty of "oh shit" moments, but I persisted, thanks to advices from a best friend and
-                senior.</p>
-            <p>This is what I classify as my success of 2012. Though it is an ongoing process, I am impressed with
-                what I put up so far.</p>
-            <p>Last year, my failures outnumbered the successes. What went wrong? Why were there so many failures?
-            </p>
+            <p>The major thing I did in 2012 was to go back to a programming career. I did this
+                for myself even if it meant that I would end up with lesser pay. Though I always
+                hated the buzzword oriented programming projects coupled with bureaucracy, I
+                have driven myself constantly toward getting accustomed to it in an effort to
+                both stay employed as well as continue to work toward being a "programmer".</p>
+            <p>There were plenty of "oh shit" moments, but I persisted, thanks to advices from a
+                best friend and senior.</p>
+            <p>This is what I classify as my success of 2012. Though it is an ongoing process, I
+                am impressed with what I put up so far.</p>
+            <p>Last year, my failures outnumbered the successes. What went wrong? Why were there
+                so many failures? </p>
             <p>I can think of two things:</p>
             <ul>
                 <li>Lack of focus. </li>
                 <li>Lack of follow-through. </li>
             </ul>
-            <p>This resulted in constant accumulation of unmanageable bits and pieces of life leading to an expected
-                and heavy disappointment. I liken this feeling to a bad hangover, which has no quick "lemon juice"
-                cure. The only way I see to succeed amidst the looming negativity is to suck it up and remove all
-                the clutter and distraction and get things done on time. No hesitating. No complaining. And no
+            <p>This resulted in constant accumulation of unmanageable bits and pieces of life
+                leading to an expected and heavy disappointment. I liken this feeling to a bad
+                hangover, which has no quick "lemon juice" cure. The only way I see to succeed
+                amidst the looming negativity is to suck it up and remove all the clutter and
+                distraction and get things done on time. No hesitating. No complaining. And no
                 excuses.</p>
-            <p>Though I am pushing to be 30 this year, I did not lose my passion for becoming better. I would like
-                to share three of my biggest motivating factors that helped me hold on to it.</p>
+            <p>Though I am pushing to be 30 this year, I did not lose my passion for becoming
+                better. I would like to share three of my biggest motivating factors that helped
+                me hold on to it.</p>
             <h3>Three things</h3>
             <p><strong>1. Zindagi Na Milegi Dobara</strong></p>
-            <p>Some time last year I watched the movie Zindagi Na Milegi Dobara. In that movie, one thing stuck to
-                me.</p>
-            <p>There is a scene in which the three friends go deep sea diving. Once they are all back on their boat,
-                one of the characters cries realizing how much he has lost in life in the rush to make it big.</p>
+            <p>Some time last year I watched the movie Zindagi Na Milegi Dobara. In that movie,
+                one thing stuck to me.</p>
+            <p>There is a scene in which the three friends go deep sea diving. Once they are all
+                back on their boat, one of the characters cries realizing how much he has lost
+                in life in the rush to make it big.</p>
             <p>Then a resonating poem is recited in the background:</p>
             <blockquote>
-                <p>Dilon mein tum apni betaabiyaan leke chal rahe ho, Toh zinda ho tum<br>
-                    Nazar mein khwaabon ki bijliyaan leke chal rahe ho, Toh zinda ho tum</p>
-                <p>Hawaa ke jhonkon ke jaise azad rehna seekho<br>
-                    Tum ek dariya ke jaise lehron mein behna seekho<br>
-                    Har ek lamhe se tum milo khole apni baahein<br>
-                    Har ek pal ik naya samaan dekhein yeh nigaahein</p>
+                <p>Dilon mein tum apni betaabiyaan leke chal rahe ho, Toh zinda ho tum<br> Nazar
+                    mein khwaabon ki bijliyaan leke chal rahe ho, Toh zinda ho tum</p>
+                <p>Hawaa ke jhonkon ke jaise azad rehna seekho<br> Tum ek dariya ke jaise lehron
+                    mein behna seekho<br> Har ek lamhe se tum milo khole apni baahein<br> Har ek
+                    pal ik naya samaan dekhein yeh nigaahein</p>
                 <p>Jo apni aankhon mein hairaaniyaan leke chal rahe ho, Toh zinda ho tum<br>
                     Dilon mein tum apni betaabiyaan leke chal rahe ho, Toh zinda ho tum</p>
             </blockquote>
             <p>and its english translation:</p>
             <blockquote>
-                <p>If you have eagerness in your heart, it means you are alive.<br>
-                    If your eyes are filled with dreams, it means you are alive.</p>
-                <p>Learn to be free like the wind,<br>
-                    Learn to flow freely like the river,<br>
-                    Embrace every moment with open arms,<br>
-                    See a new horizon every time with your eyes,</p>
-                <p>If you carry surprise in your eyes, it means you are alive,<br>
-                    If you have eagerness in your heart, it means you are alive.</p>
+                <p>If you have eagerness in your heart, it means you are alive.<br> If your eyes
+                    are filled with dreams, it means you are alive.</p>
+                <p>Learn to be free like the wind,<br> Learn to flow freely like the river,<br>
+                    Embrace every moment with open arms,<br> See a new horizon every time with
+                    your eyes,</p>
+                <p>If you carry surprise in your eyes, it means you are alive,<br> If you have
+                    eagerness in your heart, it means you are alive.</p>
             </blockquote>
-            <p>In a time when I completely lost track of what I wanted to professionally, this particular scene in
-                the movie became my biggest wake up call. I decided to continue becoming what I have started out
-                with in my career &mdash; a developer. I knew it was difficult. I knew it was a troublesome journey,
-                considering most people settle down for a lead or a manager role around this time. But I knew it had
-                to be done.</p>
+            <p>In a time when I completely lost track of what I wanted to professionally, this
+                particular scene in the movie became my biggest wake up call. I decided to
+                continue becoming what I have started out with in my career &mdash; a developer.
+                I knew it was difficult. I knew it was a troublesome journey, considering most
+                people settle down for a lead or a manager role around this time. But I knew it
+                had to be done.</p>
             <p><strong>2. Little Miss Sunshine</strong></p>
-            <p>I am nowhere near where I wanted to be, but, though late, I have started an arduous journey. There
-                are times, however, when I don't feel like swimming against the current. That is when I like to
-                remind myself of <a href="http://en.wikipedia.org/wiki/Little_Miss_Sunshine">Richard Hoover's</a>
+            <p>I am nowhere near where I wanted to be, but, though late, I have started an
+                arduous journey. There are times, however, when I don't feel like swimming
+                against the current. That is when I like to remind myself of <a
+                   href="http://en.wikipedia.org/wiki/Little_Miss_Sunshine">Richard Hoover's</a>
                 motivating words from his speech in his 9-step Refuse to Lose program:</p>
             <blockquote>
                 <p>No hesitating. No complaining. And no excuses.</p>
             </blockquote>
-            <p>In the movie, though Richard Hoover struggles to build a career as a life coach, he is persevering
-                and his words display and inspire a remarkable confidence in self.</p>
+            <p>In the movie, though Richard Hoover struggles to build a career as a life coach,
+                he is persevering and his words display and inspire a remarkable confidence in
+                self.</p>
             <p><strong>3. Neil deGrasse Tyson</strong></p>
-            <p>Once I was feeling very low and was browsing reddit and by chance found a quote from Neil deGrasse
-                Tyson:</p>
+            <p>Once I was feeling very low and was browsing reddit and by chance found a quote
+                from Neil deGrasse Tyson:</p>
             <blockquote>
-                <p>The problem, often not discovered until late in life, is that when you look for things like love,
-                    meaning, motivation, it implies they are sitting behind a tree or under a rock. The most
-                    successful people recognize, that in life they create their own love, they manufacture their own
-                    meaning, they generate their own motivation.</p>
+                <p>The problem, often not discovered until late in life, is that when you look
+                    for things like love, meaning, motivation, it implies they are sitting
+                    behind a tree or under a rock. The most successful people recognize, that in
+                    life they create their own love, they manufacture their own meaning, they
+                    generate their own motivation.</p>
             </blockquote>
-            <p>A person who was looking for motivation in life asked his advice and he received the above. This
-                thing may be the one that tipped me off of my uncertainty and anxiety into a person bent on becoming
-                a developer.</p>
-            <p>This could possibly be the reason behind my few successes last year. Now I want to reduce the failure
-                count and get back on track to achieving all my short term goals and set down a path to make my long
-                term goals a reality.</p>
-            <p>So, I vow to keep it simple and functional this year by following my mom's golden principle for
-                getting things done:</p>
+            <p>A person who was looking for motivation in life asked his advice and he received
+                the above. This thing may be the one that tipped me off of my uncertainty and
+                anxiety into a person bent on becoming a developer.</p>
+            <p>This could possibly be the reason behind my few successes last year. Now I want
+                to reduce the failure count and get back on track to achieving all my short term
+                goals and set down a path to make my long term goals a reality.</p>
+            <p>So, I vow to keep it simple and functional this year by following my mom's golden
+                principle for getting things done:</p>
             <p><strong>FOCUS!</strong></p>
             <h3>Resolutions</h3>
             <p>Here is an list of items I plan to do in 2013.</p>
@@ -766,41 +889,39 @@
                 <li>dev-log (at the least once a week)</li>
                 <li>review/updates post (every week, preferably on Friday)</li>
                 <li>some linux thingy (once a month at the least)</li>
-                <li>photography/software development/programming/teaching (whenever thoughts race)</li>
+                <li>photography/software development/programming/teaching (whenever thoughts
+                    race)</li>
                 <li>self-improvement (occasionally)</li>
-                <li>On Saturdays, either go for a neighborhood photowalk, or take camera everywhere you go.</li>
-                <li>Continue learning Python and Erlang and write about either of them on Sundays.</li>
+                <li>On Saturdays, either go for a neighborhood photowalk, or take camera
+                    everywhere you go.</li>
+                <li>Continue learning Python and Erlang and write about either of them on
+                    Sundays.</li>
                 <li>Listen to podcasts (3 hours twice a week)</li>
             </ul>
             <p><b>Plan for 2013</b></p>
-            <p>Stick to what I am doing.
-                Practice often. Take surprise tests.
-                Stay in touch with the technology updates.
-                Keep working on personal projects.
-                Plan for eventual certifications.</p>
+            <p>Stick to what I am doing. Practice often. Take surprise tests. Stay in touch with
+                the technology updates. Keep working on personal projects. Plan for eventual
+                certifications.</p>
             <p><strong>Dealing with burnout</strong></p>
-            <p>Adhere to a food discipline. Have breakfast, avoid sugar and caffeine, drinks copious amounts of
-                water.
-                Do not worry about work at home.
-                Unwind <s>occasionally</s> frequently. Go for a walk, cook for your family or partner, organize
-                desk, update shopping lists.
-                Physical activity at work. If nothing, do some stretches.</p>
+            <p>Adhere to a food discipline. Have breakfast, avoid sugar and caffeine, drinks
+                copious amounts of water. Do not worry about work at home. Unwind
+                <s>occasionally</s> frequently. Go for a walk, cook for your family or partner,
+                organize desk, update shopping lists. Physical activity at work. If nothing, do
+                some stretches.</p>
             <p><strong>Writing a regular dev-log</strong></p>
             <p>(A dev-log is a weekly update about my programming work)</p>
             <p>Write a summary of what programming work you could get done that week.</p>
             <p><strong>Personal</strong></p>
-            <p>Schedule some activity immediately after you get home.
-                Spend time with your family or partner.</p>
+            <p>Schedule some activity immediately after you get home. Spend time with your
+                family or partner.</p>
             <p>Hello and welcome, Twenty thirteen!</p>
-
         </details>
         <details>
             <summary>2011</summary>
             <p><strong>Plan</strong></p>
-            <p>I am including my org-plan for 2012 here, since most of my new year resolutions this year are about
-                sticking
-                to a schedule. I always believe that making something public is ten times more effective when you want
-                results.</p>
+            <p>I am including my org-plan for 2012 here, since most of my new year resolutions
+                this year are about sticking to a schedule. I always believe that making
+                something public is ten times more effective when you want results.</p>
             <p>
             <p class="active">Narrator: <em>No it doesn't.</em></p>
             <p>So here goes my plan.</p>
@@ -812,12 +933,9 @@
                 <li>blog once a week</li>
             </ul>
         </details>
-
     </main>
-
-    <footer>
-        Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built with html
-    </footer>
+    <footer> Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />Built
+        with html </footer>
     <style>
         details {
             border: 1px solid #eee;
@@ -838,6 +956,10 @@
         details[open] summary {
             border-bottom: 1px solid #ccc;
             margin-bottom: 0.5em;
+        }
+
+        img {
+            max-width: 100%;
         }
     </style>
     <script>
