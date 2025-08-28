@@ -23,26 +23,47 @@
             font-size: 16px;
             line-height: 1.4;
             min-width: 320px;
-            max-width: 420px;
+            max-width: 480px;
             margin: 0 auto;
         }
 
         header,
         main,
-        footer,
-        h1,
-        h1+h2 {
+        footer {
             padding: 0 7px;
         }
 
         header {
             display: flex;
-            justify-content: end;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
         }
 
-        header a {
-            font-size: 1.2rem;
-            margin-left: 10px;
+        nav {
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        nav a {
+            text-decoration: none;
+            margin: 0 2px;
+            padding: 4px;
+            background-color: #eeeeee;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        @media (max-width: 420px) {
+            nav {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            header {
+                border-bottom: 1px solid #ccc;
+            }
         }
 
         h1 {
@@ -84,13 +105,15 @@
 
 <body>
     <header>
-        <a href="/">home</a>
-        <a href="/now">now</a>
-        <a href="/posts">posts</a>
+        <h1>Posts</h1>
+        <nav>
+            <a href="/about">about</a>
+            <a href="/now">now</a>
+            <a href="/posts">posts</a>
+        </nav>
     </header>
-    <h1>Posts</h1>
-    <h2>technical writings</h2>
     <main>
+        <h2>Technical writings</h2>
         <div class="postyear">
             <b>2025</b>
             <div class="links">
@@ -106,7 +129,8 @@
         </div>
         <div class="postyear">
             <b>2022</b>
-            <div class="links"><a href="/posts/deploy-to-vps-with-sourcehut">Deploy to VPS with SourceHut</a>
+            <div class="links"><a href="/posts/deploy-to-vps-with-sourcehut">Deploy to VPS with
+                    SourceHut</a>
                 <a href="/posts/move-blog-to-sourcehut">Move blog to Sourcehut</a>
                 <a href="/posts/run-local-websites-with-caddy">Run local websites with caddy</a>
             </div>
@@ -115,13 +139,15 @@
             <b>2019</b>
             <div class="links">
                 <a href="/posts/note-taking-with-qownnotes">Note taking with QOwnNotes</a>
-                <a href="/posts/picking-a-note-taking-software">Picking a note taking software</a>
+                <a href="/posts/picking-a-note-taking-software">Picking a note taking
+                    software</a>
             </div>
         </div>
         <div class="postyear">
             <b>2013</b>
             <div class="links">
-                <a href="/posts/one-year-with-crunchbang-linux">One year with Crunchbang Linux</a>
+                <a href="/posts/one-year-with-crunchbang-linux">One year with Crunchbang
+                    Linux</a>
             </div>
         </div>
         <div class="postyear">
@@ -133,15 +159,15 @@
         <div class="postyear">
             <b>2011</b>
             <div class="links">
-                <a href="/posts/unclutter-your-desktop-with-powershell">Unclutter your desktop with
-                    PowerShell</a>
+                <a href="/posts/unclutter-your-desktop-with-powershell">Unclutter your desktop
+                    with PowerShell</a>
             </div>
         </div>
         <div class="postyear">
             <b>2010</b>
             <div class="links">
-                <a href="/posts/monitor-sql-server-backup-jobs-with-powershell">Monitor SQL Server backup jobs with
-                    PowerShell</a>
+                <a href="/posts/monitor-sql-server-backup-jobs-with-powershell">Monitor SQL
+                    Server backup jobs with PowerShell</a>
             </div>
         </div>
     </main>
