@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="title" content="Animesh Krishna Bulusu" />
+    <link rel="canonical"
+          href="https://log.baksignal.com/posts/building-a-static-blog-with-lektor" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Animesh Krishna Bulusu" />
+    <meta name="copyright" content="Animesh Krishna Bulusu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer,
+        h1,
+        h1+h2 {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: end;
+        }
+
+        header a {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        h1 {
+            color: crimson;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>Building a static blog with Lektor | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a>
+    </header>
+    <h1>Building a static blog with Lektor</h1>
+    <h2>what it says on the tin</h2>
+    <main>
+        <article>
+            <div><time datetime="2017-08-15">Aug 15, 2017</time></div>
+            <small><em>Last updated on Aug 23, 2025</em></small>
+            <fieldset>
+                <legend>Aug 23 2025 update</legend>
+                <ol>
+                    <li>The domain anmsh.net does not exist anymore.</li>
+                </ol>
+            </fieldset>
+            <h3>Setup</h3>
+            <p>Install lektor from the command line by pasting the following command. This will
+                collect and build all the dependencies necessary for Lektor.
+            <pre>curl -sf https://www.getlektor.com/install.sh | sh
+</pre>
+            <p>Create a new project
+            <pre>lektor quickstart
+
+Step 1:
+&gt; Project Name: animeshdotblog-model
+
+Step 2:
+&gt; Author Name [Animesh,,,]: Animesh Bulusu
+
+Step 3:
+&gt; Project Path [/home/animesh/projects/animeshdotblog-model]: 
+
+Step 4:
+&gt; Add Basic Blog [Y/n]: Y
+
+That's all. Create project? [Y/n] Y
+</pre>
+            <p>It will ask you the project name, author name, project path and if you want to
+                add a basic blog. I chose the project name <code>animeshdotblog-model</code> and
+                it will automatically assume the project path will be a folder with the project
+                name the current path. Of course, you can change it.
+            <h3>Configuration</h3>
+            <p>Change into the new project path and open the editor.
+            <pre>cd animeshdotblog-model
+code .
+</pre>
+            <p>Initialize a git repository, add a .gitignore file and add the
+                <code>/public</code> to it. By default, the /public folder holds the artifacts
+                after the build and we don't need it in version control. Add and commit all the
+                files.
+            <pre>git init
+touch .gitignore
+echo "/public" &gt; .gitignore
+git add .
+git commit -m "First commit"
+</pre>
+            <p>Start the website.
+            <pre>lektor server 
+</pre>
+            <p>This will run the site on port 5000. You could specify a port by adding
+                <code>-p PORT</code> at the end. To automatically open the browser after serving
+                the site, add <code>--browse</code> at the end.
+            <p><img src="https://i.imgur.com/j0dfwMk.png" alt="Lektor first run">
+                <em>First Run</em>
+            <p>The landing page is generated from the <code>contents.lr</code> file at the root
+                of <code>content</code> folder. Inside the <code>content</code> folder, you also
+                have folders for about, blog and projects with a <code>contents.lr</code> file
+                inside each of them. As explained earlier, these <code>contents.lr</code> files
+                at the root of each folder are just markdown files that Lektor expects to build
+                into the index.html for that folder.
+            <p>The <code>about/contents.lr</code> file is built into
+                <code>about/index.html</code> so that when you visit <a
+                   href="http://localhost:5000/about">http://localhost:5000/about</a> you would
+                see the contents of your about page. Pretty easy and intuitive right?
+            <p>The blog is accessible at the URL <a
+                   href="http://localhost:5000/blog">http://localhost:5000/blog</a>. For my
+                domain <a href="https://b.anmsh.net/">https://b.anmsh.net/</a> having a blog
+                like this would give the blog a URL <a
+                   href="https://b.anmsh.net/blog">https://b.anmsh.net/blog</a>, which is
+                redundant. I felt it best to move the blog to the root of the site.
+            <p>To do this, first update the root <code>contents.lr</code> as such:
+            <pre>_model: blog
+
+title: Home
+</pre>
+            <p>Then, update the blog model in <code>blog.ini</code> by adding the following in
+                the pagination section:
+            <pre>items = this.children.filter(F._model == 'blog-post')
+</pre>
+            <p>You will now see the contents of about and projects on the landing page. This is
+                because they are inside the root folder and its <code>contents.lr</code> has the
+                model set to blog.
+            <p>Then, move the folder <code>blog/first-post</code> into the <code>content</code>.
+                Now you can see the post 'Hello Website' also appears on the landing page.
+            <p>Set the _model of about and projects folders in their <code>contents.lr</code>
+                file.
+            <pre>_model: page
+
+title: About
+</pre>
+            <p>Finally, update the contents of nav tag in layout.html to this:
+            <pre>&lt;li{% if this._path == '/' %} class="active"{% endif
+    %}&gt;&lt;a href="{{ '/'|url }}"&gt;Home&lt;/a&gt;&lt;/li&gt;
+{% for href, title in [
+    ['/projects', 'Projects'],
+    ['/about', 'About']
+] %}
+    &lt;li{% if this.is_child_of(href) %} class="active"{% endif
+    %}&gt;&lt;a href="{{ href|url }}"&gt;{{ title }}&lt;/a&gt;&lt;/li&gt;
+{% endfor %}
+</pre>
+            <p>Now this is your landing page:
+            <p><img src="https://i.imgur.com/jXBWczJ.png" alt="Blog in the landing page">
+                <em>Blog in the landing page</em>
+            <p>Title on the browser tab now shows up as <code>- | animeshdotblog-model</code>.
+                You can fix this by updating the blog model <code>blog.ini</code>:
+            <pre>[model]
+name = Blog
+label = {{ this.title }}
+hidden = yes
+
+[fields.title]
+label = Title
+type = string
+</pre>
+            <p>We have added a new field <code>title</code> and updated the label attribute in
+                [model] section to <code>{{ this.title}}</code>. I am not really sure why the
+                title is empty when it is just <code>label = Blog</code>.
+            <p>Now we can move onto writing our first post.
+            <h3>Authoring posts</h3>
+            <p>Click the pencil icon in the corner to navigate to the admin.
+            <p><img src="https://i.imgur.com/ixBLLnU.png" alt="Lektor admin">
+                <em>Lektor admin</em>
+            <p>Lektor has a very minimalistic admin designed around the actions necessary for
+                the current view. Lektor admin doesn't support theming at the moment, but it
+                gets its job done. You can see the sub pages of the root About, Hello Website
+                and Projects. Though Hello Website is the only blog post, it still shows the
+                other sub folders of the root.
+            <p>Click on the plus icon beside the Home link in the top left corner to add a blog
+                post. Enter the title of the post and the ID (id or URL or slug) field
+                automatically builds off of the title. Click on the Add Child Page button to
+                open the post for editing.
+            <p><img src="https://i.imgur.com/2y8x3Pa.png" alt="Lektor admin - add post">
+                <em>Add post</em>
+            <p>This is the edit view of the post just created:
+            <p><img src="https://i.imgur.com/rN2yQdb.png" alt="Lektor admin">
+                <em>Edit post</em>
+            <p>Fill in your author and twitter handle. Unless your template displays these two
+                fields you don't have to fill them. Select publication date and click on Save
+                Changes. Your post is now created and you will be shown the post preview page
+                inside admin.
+            <p><img src="https://i.imgur.com/cx8pPMR.png" alt="Lektor admin">
+                <em>Preview post</em>
+            <p>Now check your landing page again. You have a new post:
+            <p><img src="https://i.imgur.com/RbFUolQ.png" alt="Landing page">
+                <em>New post</em>
+            <h3>Customization</h3>
+            <p>The quickstart that Lektor provides is an extremely simple website. We made a few
+                modifications to this to understand how the content is used and organized by
+                Lektor. Let us make a few customizations.
+            <p>A few customizations below use <a
+                   href="https://www.getlektor.com/docs/plugins/">Lektor plugins</a>.
+            <h3>Post Summary</h3>
+            <p>Initially, I used to have only the post title in my static site.
+            <p><img src="https://i.imgur.com/9ALN3XZ.png" alt="Simplest landing page">
+                <em>Simplest landing page</em>
+            <p>I wanted a summary of the post below the post title, generated automatically, in
+                this fashion.
+            <p><img src="https://i.imgur.com/1nk8z1Z.png" alt="My landing page">
+                <em>Simple landing page</em>
+            <p>I found a plugin for this called <a
+                   href="https://github.com/bancek/lektor-markdown-excerpt">markdown-excerpt</a>
+                which will extract the first paragraph from the body of the post. We have to
+                update the part where the body of a post is rendered in the blog.html macro or
+                wherever you have the blog post template with the filter <code>excerpt</code>
+                like this:
+            <p><code>{{ post.body|excerpt }}</code>
+            <p>When I started importing old posts from my previous blogs, I found that some
+                posts did not have a good first paragraph. To change the first paragraphs for
+                all these posts is tedious and some posts have to be adjusted for the change in
+                the first paragraph.
+            <p>Though it is not a big deal, this also means that
+                <code>{{ post.body|excerpt }}</code> is parsing the entire posts' body N times
+                on my landing page, given N posts on the landing page. It felt a bit excessive.
+                I wanted another option.
+            <p>I created a new field, <code>excerpt</code> in the blog post model
+                <code>blog-post.ini</code>:
+            <pre>[fields.excerpt]
+label = Excerpt
+type = markdown
+size = normal
+</pre>
+            <p>This creates a new field that can accept markdown text.
+            <p><img src="https://i.imgur.com/7EvPKeh.png" alt="Excerpt">
+                <em>New excerpt field in admin</em>
+            <p>Add some text there and save the post. The <code>contents.lr</code> for the post
+                has an updated field now
+            <pre>excerpt: First Post
+</pre>
+            <p>Then surround the <code>{{ post.body }}</code> part in the blog.html macro with
+                the following HTML:
+            <pre>{% if from_index %}
+{{ post.excerpt }}
+{% else %}
+&lt;div&gt;
+    {{ post.excerpt }}
+&lt;/div&gt;
+&lt;div&gt;
+    {{ post.body }}            
+&lt;/div&gt;
+{% endif %}
+</pre>
+            <p>That is all. You have posts with excerpts.
+            <p><img src="https://i.imgur.com/MSuutVl.png" alt="Simplified landing page">
+                <em>Posts with excerpts</em>
+            <h3>RSS Feed</h3>
+            <p>Every blog needs an RSS feed. There is a plugin <a
+                   href="https://github.com/ajdavis/lektor-atom">lektor-atom</a> to do this.
+            <p>To add a plugin to the site, run the following command from command line:
+            <pre>lektor plugins add lektor-atom
+</pre>
+            <p>The plugin can also be added manually in the project file
+                <code>animeshdotblog-model.lektorproject</code>:
+            <pre>[packages]
+lektor-atom = 0.2
+</pre>
+            <p>Stop the running Lektor instance by pressing Ctrl-C and run the
+                <code>lektor server</code> command again.
+            <p>Create a new folder configs in the root and create a file <code>atom.ini</code>
+                inside it. Add the following lines to <code>atom.ini</code>
+            <pre>[blog]
+name = animeshdotblog-model
+source_path = /
+url_path = /feed.xml
+items = site.query('/')
+item_model = blog-post
+</pre>
+            <p>Now you will notice the following error in the terminal:
+            <blockquote>
+                <p>E feed.xml (RuntimeError: To use absolute URLs you need to configure the URL
+                    in the project config.)
+            </blockquote>
+            <p>To fix this, you must supply an absolute URL in your project file:
+            <pre>url_style = absolute
+url = https://animeshb.github.io
+</pre>
+            <p>Finally, add a list element in the nav tag.
+            <pre>&lt;li&gt;&lt;a href="/feed.xml"&gt;RSS&lt;/a&gt;
+</pre>
+            <h3>Table of Contents</h3>
+            <p>A table of contents is useful for long articles like this one. There is an
+                official plugin for this called <a
+                   href="https://github.com/lektor/lektor-markdown-header-anchors">markdown-header-anchors</a>.
+            <p>Install the plugin:
+            <pre>lektor plugins add markdown-header-anchors
+</pre>
+            <p>Create a new post with a few headers:
+            <p><img src="https://i.imgur.com/sC8uRi6.png" alt="TOC demo">
+                <em>TOC demo before</em>
+            <p>Place this piece of HTML in your blog.html macro somewhere above the
+                <code>{{post.body}}</code>.
+            <pre>{% if not from_index %}
+    {% if post.body.toc %}
+        &lt;div class="toc-container"&gt;
+            &lt;p&gt;contents&lt;/p&gt;
+            &lt;ul class="toc"&gt;
+                {% for item in post.body.toc recursive %}
+                    &lt;li&gt;&lt;a href="#{{ item.anchor }}"&gt;{{ item.title }}&lt;/a&gt;
+                        {%if item.children %}
+                            &lt;ul&gt;{{ loop(item.children) }}&lt;/ul&gt;
+                        {% endif %}
+                    &lt;/li&gt;
+                {% endfor %}
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    {% endif %}
+{% endif %}
+</pre>
+            <p>Refresh the blog post and now you have a table of contents:
+            <p><img src="https://i.imgur.com/kdKo1UG.png" alt="TOC Demo">
+                <em>TOC demo after</em>
+            <h3>Categories</h3>
+            <p>The <a href="https://www.getlektor.com/docs/guides/categories/">official
+                    guide</a> does a good job explaining how to go about setting up categories
+                for your projects. We can easily adapt this for blog posts.
+            <p>First, we need to create two new models, one for blog categories
+                <code>blog-categories.ini</code> which will represent all categories available
+                and the other for blog category <code>blog-category.ini</code> which will
+                represent the individual category. Blog categories model will be the parent of
+                blog category.
+            <p><code>blog-categories.ini</code>
+            <pre>[model]
+name = Blog Categories
+label = Blog Categories
+hidden = yes
+protected = yes
+
+[children]
+model = blog-category
+order_by = name
+</pre>
+            <p><code>blog-category.ini</code>
+            <pre>[model]
+name = Blog Category
+label = {{ this.name }}
+hidden = yes
+
+[fields.name]
+label = Name
+type = string
+
+[children]
+replaced_with = site.query('/').filter(F.categories.contains(this))
+</pre>
+            <p>Since Lektor considers any sub folder under current folder as its child,
+                categories would not have its associated posts as its children by default. To
+                get around this, we use an attribute <code>replaced_with</code> in the
+                [children] section which makes a query to the landing page path and returns a
+                set of items that have this category.
+            <p>Next, we update the blog post model <code>blog-post.ini</code> to have a new
+                field, categories, so that it shows up in the admin when a post is in the edit
+                view.
+            <pre>[fields.categories]
+label = Categories
+type = checkboxes
+source = site.query('/blog-categories')
+</pre>
+            <p>Here we are using <code>site.query</code> to fill the categories from the folder
+                <code>blog-categories</code>.
+            <p>Now that models are ready, let us create a folder blog-categories and set its
+                contents.lr as such:
+            <pre>_model: blog-categories
+
+_slug: /categories
+</pre>
+            <p>The <code>_slug</code> will be <code>/blog-categories</code> by default, but you
+                can change it to <code>categories</code> to have a simpler URL. Go to admin and
+                now you can see a sub page for categories.
+            <p><img src="https://i.imgur.com/P42B4HX.png" alt="Categories">
+                <em>Blog Categories link on the left</em>
+            <p>Click on it and you can see that it is just a regular page on the site.
+            <p><img src="https://i.imgur.com/zZ9e7gq.png" alt="Categories">
+                <em>Categories Page Edit View</em>
+            <p>Click on the plus sign on the top left to add a sub page to Blog Categories
+            <p><img src="https://i.imgur.com/SZiObZm.png" alt="Add Category">
+                <em>Add Category</em>
+            <p>Add a few more categories in this way and you can see them on the side. After
+                adding each category we see an error like this:
+            <p><img src="https://i.imgur.com/A9h4Ijq.png" alt="Categories Error">
+                <em>Template not found</em>
+            <p>This is because we do not have templates setup for blog category and categories.
+            <p>Before adding the templates, we need to add two macros, one to fetch a list of
+                posts belonging to a category, render_post_list, and the other to render a list
+                of all categories available, render_cat_nav. Save them into a new
+                <code>categories.html</code> in the templates/macros folder.
+            <pre>{% macro render_post_list(posts) %}
+&lt;ol&gt;
+{% for post in posts.order_by('-pub_date') %}
+&lt;li&gt;&lt;a href="{{ post|url }}"&gt;{{ post.title }}&lt;/a&gt;&lt;/li&gt;
+{% endfor %}
+&lt;/ol&gt;
+{% endmacro %}
+
+{% macro render_cat_nav(active=none) %}
+{% set post_count = site.query('/blog-categories').count() %}
+&lt;h2&gt;{{post_count}} Categories&lt;/h2&gt;
+&lt;div&gt;
+&lt;ul&gt;
+{% for category in site.query('/blog-categories') %}
+    &lt;li{% if category._id == active %} class="active"{% endif
+    %}&gt;&lt;a href="{{ category|url }}"&gt;{{ category.name }}&lt;/a&gt;
+    ({{ category.children.count() }})&lt;/li&gt;
+{% endfor %}
+&lt;/ul&gt;
+&lt;/div&gt;
+{% endmacro %}
+</pre>
+            <p>In macros, we can use the <code>set</code> statement to assign a variable to an
+                expression. In the <code>render_cat_nav</code> macro, we get the count of all
+                categories available. In the <code>render_cat_nav</code> macro, while looping
+                over the available posts in the current category, we are also getting a count of
+                the available posts for that category.
+            <p>Add two templates <code>blog-categories.html</code> and
+                <code>blog-category.html</code>. After adding these two empty templates, we
+                don't see the error anymore. We need to inherit from <code>layout.html</code>
+                and update them as follows.
+            <p><code>blog-categories.html</code>
+            <pre>{% extends "layout.html" %}
+{% from "macros/categories.html" import render_cat_nav %}
+{% block title %}Tags {{ super.title }}{% endblock %}
+{% block body %}
+{{ render_cat_nav(active=none) }}
+{% endblock %}
+</pre>
+            <p><code>blog-category.html</code>
+            <pre>{% extends "layout.html" %}
+{% from "macros/categories.html" import render_post_list %}
+{% block title %}Category {{ this.name }} {{super.title}}{% endblock %}
+{% block body %}
+&lt;h2&gt;Category: {{ this.name }}&lt;/h2&gt;
+&lt;h4&gt;Posts&lt;/h4&gt;
+{% if this.children %}
+    {{ render_post_list(this.children) }}
+{%else%}
+    &lt;p&gt;No posts in category {{this.name}} yet. May be there is a draft in the works.&lt;/p&gt;
+{% endif %}
+&lt;br&gt;
+&lt;p&gt;
+    &lt;a href="/categories"&gt;Show all Categories&lt;/a&gt;
+&lt;/p&gt;
+{% endblock %}
+</pre>
+            <p>The code <code>render_post_list(this.children)</code> in blog category template
+                passes a list of children to the <code>render_post_list</code> macro which just
+                loops over and displays them.
+            <p>To have a list of categories inside a blog post, add the following piece
+                somewhere in your <code>blog.html</code> macro.
+            <pre>{%if post.categories %}
+    &lt;div&gt;Categories:
+        &lt;ul&gt;
+        {% for category in post.categories  %}
+            &lt;li&gt;&lt;a href="/categories/{{ category }}"&gt;{{category}}&lt;/a&gt;{% if not loop.last %},{% endif %}&lt;/li&gt;
+        {% endfor %}
+        &lt;/ul&gt;
+    &lt;/div&gt;
+{%endif%}
+</pre>
+            <p>Open up the blog posts in admin and select categories as needed and save them.
+            <p><img src="https://i.imgur.com/UEK6w47.png" alt="Categories on post">
+                <em>Categories on post</em>
+            <p>Also, add the categories link in the navigation. Now you have the categories
+                ready.
+            <p><img src="https://i.imgur.com/Gtx0gT8.png" alt="Categories Page">
+                <em>Categories Page</em>
+            <p>Click on any category to see the list of posts in that category.
+            <p><img src="https://i.imgur.com/q4KJd6i.png" alt="Category Page">
+                <em>Specific category</em>
+            <h3>Comments</h3>
+            <p>I had setup comments on my static site using the official plugin <a
+                   href="https://github.com/lektor/lektor-disqus-comments">lektor-disqus</a>. It
+                is fairly easy to setup comments once you have your account ready with Disqus.
+                Identify the short name from the Disqus admin and add into the config file for
+                it as per the <a
+                   href="https://github.com/lektor/lektor-disqus-comments">documentation</a>.
+            <p>I have removed the comments recently as I am experimenting with having comments
+                using gitlab issues API.
+        </article>
+    </main>
+    <footer> Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />built
+        with html </footer>
+    <style>
+        img {
+            width: 100%;
+            padding: 2px;
+            outline: 1px solid;
+            border-radius: 4px
+        }
+
+        pre {
+            outline: 2px solid seagreen;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            padding: 5px;
+            overflow: auto
+        }
+
+        fieldset {
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+
+        legend {
+            padding: 3px 6px;
+        }
+    </style>
+</body>
+
+</html>
