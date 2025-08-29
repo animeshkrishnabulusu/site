@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="title" content="Animesh Krishna Bulusu" />
+    <link rel="canonical" href="https://log.baksignal.com/posts/hello-lektor" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Animesh Krishna Bulusu" />
+    <meta name="copyright" content="Animesh Krishna Bulusu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer,
+        h1,
+        h1+h2 {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: end;
+        }
+
+        header a {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        h1 {
+            color: crimson;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>Hello Lektor | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a>
+    </header>
+    <h1>Hello lektor</h1>
+    <h2>another year another rebuild</h2>
+    <main>
+        <article>
+            <div><time datetime="2016-05-20">May 20, 2016</time></div>
+            <p>Last year I decided it was time to move to a static blog.</p>
+            <p>At the time, I had already two blogs - one on <a
+                   href="https://animeshlog.blogspot.com/">blogger</a> for 4 years and the other
+                on <a href="https://easycalm.tumblr.com/">tumblr</a> for 9 years.</p>
+            <p>The tumblr blog started as a distraction in a low point of my life. I spent a
+                good amount of time discovering great stuff including, but not limited to,
+                photography, programming and humor. What started as a distraction remained one
+                and I never was able to use that plaform to be productive while discovering all
+                that stuff. So at some point, I got a blogger blog.</p>
+            <p>Over the last four years (2012 - 2016), I wrote about 40 posts on the blogger
+                blog and removed most of them. The removed posts were just unremarkable stuff in
+                the hindsight. Most of the posts that remained did not have good content. They
+                were okay. The plans I published on what I wanted to do, which are now removed,
+                didn't work mostly because of my goal-oriented approach. I decided to move
+                toward a systems-oriented approach to achieve consistency and continuity in my
+                plans. One other thing that helped me was that blogger was uninspiring and
+                unmodern. Though better, Wordpress fell in the same bucket for me.</p>
+            <p>The other option was to build a static blog.</p>
+            <h2>Why static?</h2>
+            <p>Static sites have a few advantages over dynamic blogs depending on what is
+                desired. Among other advantages, I like that static sites are super fast, much
+                secure and versionable.</p>
+            <h3>Speed</h3>
+            <p>Static pages have really good page load speeds.</p>
+            <p>In one instance, an article on my site with the most content took around 192ms
+                with cache disabled. The associated styles and web fonts took about 338ms.
+                Disqus comments and Google analytics took just about 1s. Since some of these
+                requests happened in parallel, the overall page load completed in 1.12 seconds.
+                Each run had a different result, but the page load completed around that 1.2 -
+                1.5s range.</p>
+            <p>This is all when the cache is empty. The second and subsequent loads will be even
+                faster. Some tests even showed 500ms total time for the entire page to load.</p>
+            <p>I admit that the scenario will change a bit when there are a few images, but even
+                then the page loads will be significantly faster than its dynamic counterpart.
+            </p>
+            <p>It is quite easy to see 90/100 scores on most speed testing websites.</p>
+            <h3>Security</h3>
+            <p>A site is dynamic when every user request is handled on-the-fly. When the user
+                wants to see a list of a certain category of pages, the server routes that
+                request to the blog engine which understands the request and fetches the list
+                from a database. If the user wants to view the images in a cool lightbox
+                gallery, the blog engine provides that by employing a plugin or two.</p>
+            <p>The more the features a dynamic blog uses, the more the attack surface that is
+                exposed. In the above two scenarios, we have the server, the blog engine, the
+                database and any and all of the plugins, called attack vectors, open for attack.
+                An attack can really manifest in the form of some new kind a hack or simply from
+                something like lack of maintenance of a plugin or by not applying a security
+                patch on one of the attack vectors.</p>
+            <p>The only attack surface a static site generally has is the server. All it takes
+                is to maintain and monitor the server well and you are safer.</p>
+            <p>If you use something like Github pages or Gitlab pages, you wouldn't need to
+                worry about the server as well. These companies employ more robust techniques to
+                secure their server. The only thing you would have to worry is about your
+                content. Putting it in a better way, the only thing you would have to focus on
+                is your content.</p>
+            <h3>Versioning</h3>
+            <p>You put the static site inside a version control and work on it like any other
+                project. In a regular dynamic blog, the content resides in a database. In a
+                static site, the content resides in flat files along with the configuration and
+                the code. You write an article in your text editor, commit it and push it to the
+                central repository just like you would a feature or bug fix in your regular
+                projects. Then the act of pushing the commit to the central repo will trigger an
+                automatic deploy or a build and deploy to the server. This is convenient. In my
+                case, I push a commit to the server and automatically a gitlab <abbr
+                      title="Continuous Integration">CI</abbr> job is triggered that builds and
+                deploys the content to the server.</p>
+            <p>If you chose to put your site in a public repository, anyone can see the history
+                of the post including all the edits and the way the content is shaped into to
+                its current form. Users can create a <abbr title="Pull Request">PR</abbr> to
+                suggest an edit or correction or major update to your blog post or article. They
+                can also simply create an issue on your repository to raise a bug or fix to the
+                article/blog or to just open a dialogue on the said article/blog. I have come
+                across a few static bloggers who encourage commenting on an article entirely
+                through the way of the Github issues. I think that is very cool.</p>
+            <h3>Trade-offs</h3>
+            <p>There are also a few trade-offs with a static site.</p>
+            <ul>
+                <li>Static sites are not for non-technical users due to initial setup and the
+                    process involved.</li>
+                <li>No or limited admin.</li>
+                <li>Limited plugin availability</li>
+            </ul>
+            <p>So while static sites are not everyone, if you are the adventurous type, you can
+                give static sites a try.</p>
+            <p>Enter Lektor.</p>
+            <h2>Why Lektor?</h2>
+            <p>As a Python enthusiast, I had to choose between Pelican and Nikola and the more
+                recent ones, Urubu and Lektor. As I explored these four static site generators,
+                I realized all of them were very capable and powerful in their own ways.</p>
+            <p>However, Lektor felt the right fit for me for the following reasons.</p>
+            <h3>Simple folder hierarchy</h3>
+            <p>Folder hierarchy:</p>
+            <pre><code>assets
+content
+    about
+        contents.lr
+    blog-post-1
+        contents.lr
+models
+    blog.ini
+    blog-post.ini
+templates
+    layout.html
+</code></pre>
+            <p>These are the key folders:</p>
+            <ol>
+                <li>assets folder has styles and images</li>
+                <li>the content folder has articles and sub sections</li>
+                <li>models contain data models which can create a type of page or a set of pages
+                    and set attributes for pages</li>
+                <li>templates contain HTML templates and macros for reusable HTML fragments</li>
+            </ol>
+            <p>The <code>contents.lr</code> files at the root of each folder are just markdown
+                files that Lektor expects to build into the index.html for that folder.</p>
+            <h3>No language based configuration</h3>
+            <p>As a developer, I don't mind messing with code and language based configuration
+                files. As a content author, I want to deal only with flat files. I do not want
+                to mess around with code.</p>
+            <p>There is an obvious overlap between the personas, a developer, and a content
+                author since often you fix some feature to accommodate some new content or a
+                scenario for a new article. Since this happens quite often, I handle this as a
+                workflow task rather than mixing both personas.</p>
+            <h3>Data modeling</h3>
+            <p>Data models allow us to create a representation of a specific HTML output. Each
+                model will have a few base fields like the name and description. We can extend
+                the models somewhat to create systems like navigation, pagination, and possibly
+                even more.</p>
+            <p>We will see how models are used when we walk through the <a
+                   href="/building-a-static-blog-with-lektor">configuration</a> and
+                customization of a static blog .</p>
+            <h3>Convenient CLI tool</h3>
+            <p>Lektor comes with a neat CLI tool that helps us create, build, serve and deploy
+                projects. Lektor CLI has fewer commands than its counterparts.</p>
+            <p>Type lektor and see the available commands. I use two commands most of the time,
+                <code>lektor server</code>, to serve the content locally, and
+                <code>lektor build</code>, to download packages if needed and build the content.
+            </p>
+            <p>Each command comes with a good amount of documentation. Simply append
+                <code>--help</code> at the end of a command like this:</p>
+            <pre>lektor build --help</pre>
+            <p>This gives a nice help text with all the switches you could use with the
+                <code>lektor build</code> command.</p>
+            <h2>Conclusion</h2>
+            <p>So, thanks to gitlab pages and Lektor, I have a new home for my blogging
+                activities. Over the next few months, I will keep busy with the following
+                activities:</p>
+            <ol>
+                <li>Importing select posts from previous blogs</li>
+                <li>Enhancing Lektor functionalities.</li>
+            </ol>
+            <p>These are the unordered and unprioritized list of todos for this blog at the
+                moment.</p>
+            <ol>
+                <li>post drafts - Feb 02 2019</li>
+                <li>post series - Jan 13 2019</li>
+                <li>recent / related posts</li>
+                <li>introduce webpack</li>
+                <li>rss feed - Jan 15 2017</li>
+                <li>tags - Aug 02 2017</li>
+            </ol>
+        </article>
+    </main>
+    <footer> Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />built
+        with html </footer>
+</body>
+
+</html>
