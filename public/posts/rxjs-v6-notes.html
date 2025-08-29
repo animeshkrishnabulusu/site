@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="title" content="Animesh Krishna Bulusu" />
+    <link rel="canonical" href="https://log.baksignal.com/posts/rxjs-v6-notes" />
+    <meta charset="utf-8" />
+    <meta name="author" content="Animesh Krishna Bulusu" />
+    <meta name="copyright" content="Animesh Krishna Bulusu" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        html {
+            color-scheme: light dark;
+            box-sizing: border-box;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            font-size: 16px;
+            line-height: 1.4;
+            min-width: 320px;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+
+        header,
+        main,
+        footer,
+        h1,
+        h1+h2 {
+            padding: 0 7px;
+        }
+
+        header {
+            display: flex;
+            justify-content: end;
+        }
+
+        header a {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        h1 {
+            color: crimson;
+            font-size: 28px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 0;
+        }
+
+        h1,
+        h2 {
+            font-weight: 400;
+        }
+
+        a[href^="https://"]::after,
+        a[href^="mailto:"]::after {
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "\1F855";
+            display: inline-block;
+            height: 11px;
+            margin-left: 4px;
+            width: 11px;
+        }
+
+        footer {
+            margin: 2.5rem 0 1rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+        }
+    </style>
+    <title>RxJS v6 Notes | Animesh Krishna Bulusu</title>
+</head>
+
+<body>
+    <header>&LeftArrow; <a href="/posts">all posts</a> <a href="/">home</a>
+    </header>
+    <h1>RxJS v6 Notes</h1>
+    <h2>interactive exploration of RxJS</h2>
+    <main>
+        <article>
+            <div><time datetime="2021-12-11">Dec 11, 2021</time></div>
+            <p>This is a list of rxjs practice snippets based on Academind's <a
+                   href="https://www.youtube.com/playlist?list=PL55RiY5tL51pHpagYcrN9ubNLVXF8rGVi">Understanding
+                    RxJS series</a>.</p>
+            <ul>
+                <li><a class="no-deco" href="#what">The what and why</a></li>
+                <li><a class="no-deco" href="#obs">Observables, observers and subscriptions</a>
+                </li>
+            </ul>
+            <h2><a name="what">The what and why</a></h2>
+            <p>Exercitation irure eiusmod magna nulla Lorem deserunt non sit dolore deserunt
+                sint commodo exercitation. Et voluptate aliquip do deserunt reprehenderit. Esse
+                veniam qui dolore eu ipsum aute tempor voluptate irure fugiat voluptate irure.
+                Dolore ea reprehenderit Lorem dolore in ad est nostrud eu culpa do.</p>
+            <div class="code">
+                <div>
+                    <button id="btn1">Click me</button>
+                </div>
+                <div><span></span></div>
+            </div>
+            <p>Ex nostrud esse culpa duis deserunt ut esse consequat incididunt ullamco et
+                veniam qui do. Commodo minim dolore labore consectetur cupidatat sunt commodo.
+                Qui ad eu ut anim irure ea pariatur pariatur ea cupidatat. Aliquip Lorem labore
+                adipisicing ex qui laborum eu ullamco esse eiusmod labore mollit id pariatur. Et
+                Lorem nisi sint excepteur fugiat consequat. Velit consectetur qui culpa est sint
+                dolor laboris in duis ex sit pariatur excepteur cillum. Ad ullamco eiusmod
+                proident esse exercitation tempor laboris cillum.</p>
+            <p>Lorem sit nulla incididunt enim aliquip deserunt duis eiusmod consequat
+                exercitation. Mollit magna do id nulla dolore. Eu ea reprehenderit commodo
+                eiusmod ullamco cillum incididunt anim ea laborum amet laboris consequat
+                commodo. Id ea velit excepteur labore tempor exercitation velit labore do mollit
+                nulla cillum. Est elit tempor reprehenderit adipisicing deserunt ullamco dolore
+                laboris culpa et est. Aliquip ea aliquip Lorem culpa ex amet tempor ullamco
+                occaecat exercitation do.</p>
+            <h2><a name="obs">Observables, observers and subscriptions</a></h2>
+            <p>Dolor sint incididunt ipsum eiusmod aliquip excepteur ipsum. Ut sunt quis Lorem
+                non id deserunt ad eiusmod velit sint. Id consequat id ea velit id cillum.</p>
+            <p>Qui anim quis magna sunt occaecat dolor eu. Adipisicing aliquip minim qui
+                deserunt amet nostrud qui nulla quis tempor aute. Ipsum excepteur veniam aute
+                est veniam culpa. Aliqua esse laborum elit duis eiusmod. Veniam consequat est
+                minim adipisicing eiusmod ex ut incididunt laborum. Voluptate mollit excepteur
+                commodo enim ex adipisicing aliquip deserunt dolor.</p>
+            <p>Anim ut sint enim cillum culpa consectetur eiusmod veniam minim ut exercitation
+                adipisicing. Ad non amet cupidatat Lorem adipisicing occaecat commodo cillum
+                non. Proident nostrud dolore proident eu adipisicing. Exercitation minim
+                incididunt et officia qui irure deserunt proident irure. Deserunt minim ut Lorem
+                Lorem incididunt cupidatat ipsum duis. Amet et aute in anim.</p>
+            <div class="code">
+                <div>
+                    <button id="btn2">Click me</button>
+                </div>
+                <div><span></span></div>
+            </div>
+        </article>
+    </main>
+    <footer> Animesh Krishna Bulusu. © 2025<br />Site is licensed under CC BY-SA 4.0<br />built
+        with html </footer>
+    <script>var exports = {};</script>
+    <script defer src="https://unpkg.com/rxjs@7.3.0/dist/bundles/rxjs.umd.min.js"></script>
+    <script defer src="/static/js/rxjs-v6-practice.js"></script>
+</body>
+
+</html>
